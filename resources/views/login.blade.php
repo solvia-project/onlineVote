@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Viho Admin</title>
+    <title>Login - Admin</title>
 
     <link rel="icon" href="/images/favicon.png" type="image/x-icon">
     <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon">
@@ -78,7 +78,7 @@
 
                             <p class="mt-3">
                                 Have account yet?
-                                <a href="register.html">Register here.</a>
+                                <a href="register">Register here.</a>
                             </p>
                         </form>
                     </div>
