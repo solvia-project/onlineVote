@@ -71,7 +71,7 @@
 
                             <div class="form-group d-flex align-items-center gap-2">
                                 <a class="link" href="forget-password.html">Forgot password?</a>
-                                <a href="">Click here</a>
+                                <a href="/forgot-password">Click here</a>
                             </div>
 
                             <button class="btn btn-primary btn-block" type="submit">Sign in</button>
