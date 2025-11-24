@@ -9,7 +9,7 @@
     <meta name="author" content="pixelstrap">
     <link rel="icon" href="images/favicon.png" type="image/x-icon">
     <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
-    <title>viho - Premium Admin Template</title>
+    <title>Register - User</title>
     <!-- Google font-->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="../../css2.css?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap" rel="stylesheet">
@@ -52,37 +52,14 @@
             <div class="login-card">
               <div class="login-main">
                 <form class="theme-form login-form">
-                  <h4 class="mb-3">Reset Your Password</h4>
-                  <div class="form-group">
-                    <label>Enter Your Mobile Number</label>
-                    <div class="row">
-                      <div class="col-4 col-sm-3">
-                        <input class="form-control" type="text" value="+ 91">
-                      </div>
-                      <div class="col-8 col-sm-9">
-                        <input class="form-control" type="tel" value="000-000-0000">
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <button class="btn btn-primary btn-block" type="submit">Send</button>
-                  </div>
-                  <div class="form-group"><span class="reset-password-link">If don't receive OTP?  <a class="btn-link text-danger" href="javascript:void(0)">Resend</a></span></div>
-                  <div class="form-group">
-                    <label>Enter OTP</label>
-                    <div class="row">
-                      <div class="col">
-                        <input class="form-control text-center opt-text" type="text" value="00" maxlength="2">
-                      </div>
-                      <div class="col">
-                        <input class="form-control text-center opt-text" type="text" value="00" maxlength="2">
-                      </div>
-                      <div class="col">
-                        <input class="form-control text-center opt-text" type="text" value="00" maxlength="2">
-                      </div>
-                    </div>
-                  </div>
-                  <h6>Create Your Password</h6>
+                  <h4 class="mb-3">Forgot Password</h4>
+                            <div class="form-group">
+                                <label>Email Address</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><img src="{{ asset('images/login/email.png') }}" alt=""></i></span>
+                                    <input type="email" class="form-control" required placeholder="email@mail.com">
+                                </div>
+                            </div>
                   <div class="form-group">
                     <label>New Password</label>
                     <div class="input-group"><span class="input-group-text"><i class="icon-lock"></i></span>
@@ -97,15 +74,9 @@
                     </div>
                   </div>
                   <div class="form-group">
-                    <div class="checkbox">
-                      <input id="checkbox1" type="checkbox">
-                      <label class="text-muted" for="checkbox1">Remember password</label>
-                    </div>
+                    <button class="btn btn-primary btn-block" type="submit">Reset Password &rightarrow;</button>
                   </div>
-                  <div class="form-group">
-                    <button class="btn btn-primary btn-block" type="submit">Done                          </button>
-                  </div>
-                  <p>Already have an password?<a class="ms-2" href="login.html">Sign in</a></p>
+
                 </form>
               </div>
             </div>
