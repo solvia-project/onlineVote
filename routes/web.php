@@ -21,3 +21,7 @@ Route::get('/forgot-password', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 });
+
+Route::get('/voter-page', function () {
+    return view('voters-page');
+});
