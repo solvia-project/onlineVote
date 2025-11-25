@@ -41,8 +41,7 @@
     </nav>
 
     <div id="app">
-        <main class="py-4 container">
-
+        <main>
             @yield('content')
         </main>
     </div>
