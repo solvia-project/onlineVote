@@ -59,7 +59,7 @@
                 <button class="btn btn-primary btn-block" type="submit">Create Account</button>
               </div>
 
-              <p>Already have an account?<a class="ms-2" href="login.html">Sign in</a></p>
+              <p>Already have an account?<a class="ms-2" href="/login">Sign in</a></p>
 
             </form>
           </div>
