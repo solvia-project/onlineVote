@@ -17,3 +17,7 @@ Route::get('/register', function () {
 Route::get('/forgot-password', function () {
     return view('forgot-password');
 });
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+});

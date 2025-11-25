@@ -13,9 +13,9 @@
                     <!-- Right Side -->
                     <ul class="navbar-nav ms-auto">
                         @guest
-                            <li class="nav-item">
-                                <a class="nav-link">{{ __('Login') }}</a>
-                            </li>
+                        <li class="onhover-dropdown p-0">
+                        <button class="btn btn-primary-light" type="button"><i data-feather="log-out"></i>Log out</button>
+                        </li>
                             @if (Route::has('register'))
                                 <li class="nav-item">
                                     <a class="nav-link" >{{ __('Register') }}</a>
