@@ -46,9 +46,8 @@
                             <div class="card-body text-center">
                                 <p class="fw-bold m-0">Nurhadi & Aldo</p>
                                 <button class="btn btn-primary btn-vote" data-candidate="{{ $num }}">
-    Vote Now
-</button>
-
+                                Vote Now
+                            </button>
                             </div>
                         </div>
                     </div>

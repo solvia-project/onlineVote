@@ -22,6 +22,10 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 });
 
-Route::get('/voter-page', function () {
-    return view('voters-page');
+Route::get('/vote-page', function () {
+    return view('vote-page');
+});
+
+Route::get('/voters-dashboard', function () {
+    return view('voters-dashboard');
 });
