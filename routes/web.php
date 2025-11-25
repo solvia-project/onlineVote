@@ -29,3 +29,7 @@ Route::get('/vote-page', function () {
 Route::get('/voters-dashboard', function () {
     return view('voters-dashboard');
 });
+
+Route::get('/admin/dashboard', function () {
+    return view('admin');
+});

@@ -1,12 +1,12 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
+<head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Admin Panel')</title>
+    <title>Login - Admin</title>
 
-    <!-- Favicon -->
     <link rel="icon" href="/images/favicon.png" type="image/x-icon">
     <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon">
 
@@ -26,17 +26,19 @@
     <!-- Bootstrap -->
     <link rel="stylesheet" href="/css/bootstrap.css">
 
-    <!-- Main Styles -->
+    <!-- Main Style -->
     <link rel="stylesheet" href="/css/style.css">
     <link id="color" rel="stylesheet" href="/css/color-1.css">
     <link rel="stylesheet" href="/css/responsive.css">
-    @vite('resources/css/app.css')
+
+    <!-- Styles -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     @stack('styles')
 </head>
 <body>
-
-    {{-- Navbar --}}
-    @include('layouts.navbar')
+    <nav>
+        @include('layouts.navbar')
+    </nav>
 
     <div id="app">
         <main>
@@ -44,10 +46,12 @@
         </main>
     </div>
 
-    {{-- Footer --}}
-    @include('layouts.footer')
+    <footer>
+        @include('layouts.footer')
+    </footer>
 
     <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="/js/jquery-3.5.1.min.js"></script>
     <script src="/js/icons/feather-icon/feather.min.js"></script>
     <script src="/js/icons/feather-icon/feather-icon.js"></script>
