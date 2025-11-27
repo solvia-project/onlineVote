@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="/css/themify.css">
     <link rel="stylesheet" href="/css/flag-icon.css">
     <link rel="stylesheet" href="/css/feather-icon.css">
-
+    <link rel="stylesheet" type="text/css" href="/css/datatables.css">
     <!-- Bootstrap -->
     <link rel="stylesheet" href="/css/bootstrap.css">
 
@@ -60,6 +60,9 @@
     <script src="/js/bootstrap/popper.min.js"></script>
     <script src="/js/bootstrap/bootstrap.min.js"></script>
     <script src="/js/script.js"></script>
+    <script src="/js/datatable/datatables/jquery.dataTables.min.js"></script>
+    <script src="/js/datatable/datatables/datatable.custom.js"></script>
+    <script src="/js/tooltip-init.js"></script>
 
     @stack('scripts')
 </body>
