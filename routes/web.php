@@ -33,3 +33,7 @@ Route::get('/voters-dashboard', function () {
 Route::get('/admin/dashboard', function () {
     return view('admin');
 });
+
+Route::get('/admin/dashboard', function () {
+    return view('admin');
+});
