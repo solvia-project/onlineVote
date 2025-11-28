@@ -49,7 +49,7 @@
                         <a class="nav-link menu-title active"><i data-feather="home"></i><span>Dashboard</span></a>
                     </li>
                     <li class="dropdown">
-                        <a class="nav-link menu-title "><i data-feather="airplay"></i><span>Widgets</span></a>
+                        <a class="nav-link menu-title "><i data-feather="airplay"></i><span>Manage Election</span></a>
                     </li>
                 </ul>
             </div>
@@ -65,10 +65,14 @@
               <div class="col-sm-12">
                 <div class="card">
                   <div class="card-header pb-0">
-                    <h5>DOM / jQuery </h5><span>Events assigned to the table can be exceptionally useful for user interaction, however you must be aware that DataTables will add and remove rows from the DOM as they are needed (i.e. when paging only the visible elements are actually available in the DOM). As such, this can lead to the odd hiccup when working with events.</span><span>One of the best ways of dealing with this is through the use of delegated events with jQuery's <code>on</code> method, as shown in this example. This
-                                     example also uses the DataTables<code class="api" title="DataTables API method">row().data()API</code>               method to retrieve information about the selected row - the row's data so we can show it in the <code>alert</code> message in this case.</span>
+                    <h5>Manage Election</h5>
+
                   </div>
+
                   <div class="card-body">
+                    <div class="mb-4">
+                        <button class="btn btn-primary">+ Add Election</button>
+                    </div>
                     <div class="table-responsive">
                       <table class="display" id="advance-1">
                         <thead>
