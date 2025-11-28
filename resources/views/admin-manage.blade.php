@@ -46,10 +46,10 @@
                         <div class="mobile-back text-end"><span>Back</span><i class="fa fa-angle-right ps-2" aria-hidden="true"></i></div>
                     </li>
                     <li class="dropdown">
-                        <a class="nav-link menu-title active"><i data-feather="home"></i><span>Dashboard</span></a>
+                        <a class="nav-link menu-title active" href="/admin/dashboard"><i data-feather="home"></i><span>Dashboard</span></a>
                     </li>
                     <li class="dropdown">
-                        <a class="nav-link menu-title "><i data-feather="airplay"></i><span>Manage Election</span></a>
+                        <a class="nav-link menu-title" href="/admin/manage"><i data-feather="airplay"></i><span>Manage Election</span></a>
                     </li>
                 </ul>
             </div>
@@ -71,7 +71,9 @@
 
                   <div class="card-body">
                     <div class="mb-4">
-                        <button class="btn btn-primary">+ Add Election</button>
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addElectionModal">
+                            + Add Election
+                        </button>
                     </div>
                     <div class="table-responsive">
                       <table class="display" id="advance-1">
@@ -98,7 +100,12 @@
                             <td><div class="btn btn-primary">Upcoming</div></td>
                             <td>
                                 <div class="row-3">
-                                    <button class="btn btn-primary">Edit</button>
+                                    <button
+                                        class="btn btn-primary"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#editElectionModal">
+                                        Edit
+                                    </button>
                                     <button class="btn btn-dark">Deactive</button>
                                     <button class="btn btn-danger">Delete</button>
                                 </div>
@@ -114,7 +121,12 @@
                             <td><div class="btn btn-dark">Done</div></td>
                             <td>
                                 <div  class="row-3">
-                                    <button class="btn btn-primary">Edit</button>
+                                    <button
+                                        class="btn btn-primary"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#editElectionModal">
+                                        Edit
+                                    </button>
                                     <button class="btn btn-dark">Deactive</button>
                                     <button class="btn btn-danger">Delete</button>
                                 </div>
@@ -130,7 +142,12 @@
                             <td><div class="btn btn-success">Active</div></td>
                             <td>
                                 <div  class="row-3">
-                                    <button class="btn btn-primary">Edit</button>
+                                    <button
+                                        class="btn btn-primary"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#editElectionModal">
+                                        Edit
+                                    </button>
                                     <button class="btn btn-dark">Deactive</button>
                                     <button class="btn btn-danger">Delete</button>
                                 </div>
@@ -146,62 +163,199 @@
           </div>
     </div>
 
-    {{-- modals add --}}
-    <div class="container-fluid p-0">
-        <div class="row m-0">
-          <div class="col-12 p-0">
-            <div class="login-card">
-              <form class="theme-form login-form">
-                <h4>Create your account</h4>
-                <h6>Enter your personal details to create account</h6>
-                <div class="form-group">
-                  <label>Your Name</label>
-                  <div class="small-group">
-                    <div class="input-group"><span class="input-group-text"><i class="icon-user"></i></span>
-                      <input class="form-control" type="text" required="" placeholder="Fist Name">
-                    </div>
-                    <div class="input-group"><span class="input-group-text"><i class="icon-user"></i></span>
-                      <input class="form-control" type="email" required="" placeholder="Last Name">
-                    </div>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label>Email Address</label>
-                  <div class="input-group"><span class="input-group-text"><i class="icon-email"></i></span>
-                    <input class="form-control" type="email" required="" placeholder="Test@gmail.com">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label>Password</label>
-                  <div class="input-group"><span class="input-group-text"><i class="icon-lock"></i></span>
-                    <input class="form-control" type="password" name="login[password]" required="" placeholder="*********">
-                    <div class="show-hide"><span class="show">                         </span></div>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <div class="checkbox">
-                    <input id="checkbox1" type="checkbox">
-                    <label class="text-muted" for="checkbox1">Agree with <span>Privacy Policy                   </span></label>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <button class="btn btn-primary btn-block" type="submit">Create Account</button>
-                </div>
-                <div class="login-social-title">
-                  <h5>signup with</h5>
-                </div>
-                <div class="form-group">
-                  <ul class="login-social">
-                    <li><a href="../../login.html" target="_blank"><i data-feather="linkedin"></i></a></li>
-                    <li><a href="../../login.html" target="_blank"><i data-feather="twitter"></i></a></li>
-                    <li><a href="../../login.html" target="_blank"><i data-feather="facebook"></i></a></li>
-                    <li><a href="https://www.instagram.com/login" target="_blank"><i data-feather="instagram">                  </i></a></li>
-                  </ul>
-                </div>
-                <p>Already have an account?<a class="ms-2" href="log-in.html">Sign in</a></p>
-              </form>
+    {{-- Modal Add Election --}}
+<div class="modal fade" id="addElectionModal" tabindex="-1" aria-labelledby="addElectionModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title">Add New Election</h5>
             </div>
-          </div>
+
+            <form action="#" method="POST" enctype="multipart/form-data" class="theme-form">
+                @csrf
+
+                <div class="modal-body">
+
+                    {{-- ROW: TITLE + CATEGORY --}}
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="fw-bold">Judul</label>
+                            <input type="text" name="title" class="form-control" placeholder="Masukkan judul election" required>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="fw-bold">Kategori</label>
+                            <input type="text" name="category" class="form-control" placeholder="Masukkan kategori" required>
+                        </div>
+                    </div>
+
+                    {{-- DESCRIPTION --}}
+                    <div class="mb-4">
+                        <label class="fw-bold">Deskripsi</label>
+                        <textarea name="description" class="form-control" rows="3" placeholder="Masukkan deskripsi"></textarea>
+                    </div>
+
+                    {{-- START & DEADLINE --}}
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="fw-bold">Start Date</label>
+                            <input type="datetime-local" name="start_date" class="form-control" required>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label class="fw-bold">Deadline</label>
+                            <input type="datetime-local" name="deadline" class="form-control" required>
+                        </div>
+                    </div>
+
+                    {{-- STATUS --}}
+                    <div class="mb-4">
+                        <label class="fw-bold">Status</label>
+                        <select name="status" class="form-control" required>
+                            <option value="upcoming">Upcoming</option>
+                            <option value="active">Active</option>
+                            <option value="done">Done</option>
+                        </select>
+                    </div>
+
+                    {{-- CANDIDATE SECTION --}}
+                    <h6 class="fw-bold mt-4 mb-3">Add Candidate</h6>
+
+                    {{-- Candidate item --}}
+                    <div id="candidateWrapper">
+
+                        <div class="candidate-item border rounded p-3 mb-4">
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label class="fw-bold">Candidate Name</label>
+                                    <input name="candidate_name[]" class="form-control" required placeholder="Masukkan nama kandidat">
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="fw-bold">Upload Image</label>
+                                    <input type="file" name="candidate_image[]" class="form-control" accept="image/*" required>
+                                </div>
+                            </div>
+
+                            <label class="fw-bold">Candidate Description</label>
+                            <textarea name="candidate_description[]" class="form-control" rows="3" placeholder="Deskripsi kandidat"></textarea>
+                        </div>
+
+                    </div>
+
+                    <button type="button" class="btn btn-primary" id="addMoreCandidate">+ Add More Candidate</button>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+
+            </form>
+
         </div>
-      </div>
+    </div>
+</div>
+
+{{-- Modal Edit Election --}}
+<div class="modal fade" id="editElectionModal" tabindex="-1" aria-labelledby="editElectionModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title">Add New Election</h5>
+            </div>
+
+            <form action="#" method="POST" enctype="multipart/form-data" class="theme-form">
+                @csrf
+
+                <div class="modal-body">
+
+                    {{-- ROW: TITLE + CATEGORY --}}
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="fw-bold">Judul</label>
+                            <input type="text" name="title" class="form-control" placeholder="Masukkan judul election" required>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="fw-bold">Kategori</label>
+                            <input type="text" name="category" class="form-control" placeholder="Masukkan kategori" required>
+                        </div>
+                    </div>
+
+                    {{-- DESCRIPTION --}}
+                    <div class="mb-4">
+                        <label class="fw-bold">Deskripsi</label>
+                        <textarea name="description" class="form-control" rows="3" placeholder="Masukkan deskripsi"></textarea>
+                    </div>
+
+                    {{-- START & DEADLINE --}}
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="fw-bold">Start Date</label>
+                            <input type="datetime-local" name="start_date" class="form-control" required>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label class="fw-bold">Deadline</label>
+                            <input type="datetime-local" name="deadline" class="form-control" required>
+                        </div>
+                    </div>
+
+                    {{-- STATUS --}}
+                    <div class="mb-4">
+                        <label class="fw-bold">Status</label>
+                        <select name="status" class="form-control" required>
+                            <option value="upcoming">Upcoming</option>
+                            <option value="active">Active</option>
+                            <option value="done">Done</option>
+                        </select>
+                    </div>
+
+                    {{-- CANDIDATE SECTION --}}
+                    <h6 class="fw-bold mt-4 mb-3">Add Candidate</h6>
+
+                    {{-- Candidate item --}}
+                    <div id="candidateWrapper">
+
+                        <div class="candidate-item border rounded p-3 mb-4">
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label class="fw-bold">Candidate Name</label>
+                                    <input name="candidate_name[]" class="form-control" required placeholder="Masukkan nama kandidat">
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="fw-bold">Upload Image</label>
+                                    <input type="file" name="candidate_image[]" class="form-control" accept="image/*" required>
+                                </div>
+                            </div>
+
+                            <label class="fw-bold">Candidate Description</label>
+                            <textarea name="candidate_description[]" class="form-control" rows="3" placeholder="Deskripsi kandidat"></textarea>
+                        </div>
+
+                    </div>
+
+                    <button type="button" class="btn btn-primary" id="addMoreCandidate">+ Add More Candidate</button>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>
+
+
+
+
 @endsection
