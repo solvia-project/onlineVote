@@ -8,7 +8,7 @@
 </div>
 
 <div class="page-wrapper compact-sidebar" id="pageWrapper">
-    <div class="page-body-wrapper sidebar-icon">
+    <div class="sidebar-icon">
         <div class="mt-5 mx-5">
             <div class="container-fluid">
 
@@ -16,65 +16,97 @@
 
                 <div class="row g-4 align-items-stretch">
 
-                    <!-- LEFT PROFILE + ACTIVITY -->
-                    <div class="col-xl-3 col-lg-4 col-md-6">
+                    <!-- LEFT PROFILE -->
+                    <div class="col-lg-4 col-md-6">
                         <div class="card p-3 h-100" style="background:#325246; color:white; border-radius:12px;">
                             <h6 class="fw-bold mb-1">Hi, Ainun Faturrahman</h6>
-                            <p class="text-white-50 small mb-3">fatur@gmail.com • C182040933121</p>
+                            <p class="text-white-50 small mb-3">fatur@gmail.com | C182040933121</p>
 
                             <div class="p-3" style="background:#b1d4c7; border-radius:12px;">
                                 <p class="mb-2 fw-semibold text-dark">Recent Activity</p>
 
                                 <div class="small">
-                                    <p class="mb-1">Election A: <span class="fw-bold">Voted • Aug 10, 2025</span></p>
+                                    <p class="mb-1">Election A: <span class="fw-bold">Voted on Aug 10, 2025</span></p>
                                     <hr>
-                                    <p class="mb-1">Election B: <span class="fw-bold">Voted • Jul 22, 2025</span></p>
+                                    <p class="mb-1">Election B: <span class="fw-bold">Voted on Jul 22, 2025</span></p>
                                     <hr>
-                                    <p class="mb-1">Election C: <span class="fw-bold">Voted • Jun 15, 2025</span></p>
+                                    <p class="mb-1">Election C: <span class="fw-bold">Voted on Jun 15, 2025</span></p>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- TOTAL ELECTION JOINED -->
-                    <div class="col-xl-3 col-lg-4 col-md-6">
-                        <div class="card p-3 h-100 text-center" style="background:#325246; color:white; border-radius:12px;">
-                            <h6 class="fw-bold mb-2">Total Election Joined</h6>
+                    <!-- RIGHT CONTENT (full height 2 cards + button) -->
+                    <div class="col-lg-8 col-md-6">
 
-<div class="d-flex flex-column justify-content-center align-items-center text-center p-4"
-     style="background:#b1d4c7; border-radius:12px; height: 150px;">
+                        <div class="row g-4 align-items-stretch">
 
-                                <img src="{{ asset('images/caleg/vote.svg') }}" width="40">
-                                <div>
-                                    <p class="m-0 fw-bold text-dark" style="font-size:22px;">20</p>
-                                    <span class="text-dark-50 small">Times Participated</span>
+                            <!-- CARD 1 -->
+                            <div class="col-lg-6 col-md-6 d-flex">
+                                <div class="card p-3 text-center h-100 w-100"
+                                    style="background:#325246; color:white; border-radius:12px;">
+
+                                    <div class="p-3 h-100 d-flex flex-column justify-content-center"
+                                        style="background:#b1d4c7; border-radius:12px;">
+
+                                        <p class="mb-2 fw-semibold text-dark">Total Election Joined</p>
+                                        <p class="mb-1">
+                                            <img src="{{ asset('images/caleg/vote.svg') }}" width="35">
+                                            <span class="fw-bold text-dark">20 Votes</span>
+                                        </p>
+                                    </div>
+
                                 </div>
                             </div>
-                        </div>
-                    </div>
 
-                    <!-- TOTAL UPCOMING ELECTIONS -->
-                    <div class="col-xl-3 col-lg-4 col-md-6">
-                        <div class="card p-3 h-100 text-center" style="background:#325246; color:white; border-radius:12px;">
-                            <h6 class="fw-bold mb-2">Upcoming Elections</h6>
+                            <!-- CARD 2 -->
+                            <div class="col-lg-6 col-md-6 d-flex">
+                                <div class="card p-3 text-center h-100 w-100"
+                                    style="background:#325246; color:white; border-radius:12px;">
 
-                            <div class="d-flex justify-content-center align-items-center gap-3 p-3"
-                                style="background:#b1d4c7; border-radius:12px;">
-                                <img src="{{ asset('images/caleg/vote.svg') }}" width="40">
-                                <div>
-                                    <p class="m-0 fw-bold text-dark" style="font-size:22px;">5</p>
-                                    <span class="text-dark-50 small">Scheduled Events</span>
+                                    <div class="p-3 h-100 d-flex flex-column justify-content-center"
+                                        style="background:#b1d4c7; border-radius:12px;">
+
+                                        <p class="mb-2 fw-semibold text-dark">Total Votes Cast</p>
+                                        <p class="mb-1">
+                                            <img src="{{ asset('images/voter/user-check.svg') }}" width="35">
+                                            <span class="fw-bold text-dark">20 Registered Votes</span>
+                                        </p>
+                                    </div>
+
                                 </div>
                             </div>
-                        </div>
-                    </div>
 
+                            <!-- BUTTON -->
+                            <div class="col-12 d-flex justify-content-end">
+                                <button class="btn btn-dark px-4 py-2" style="border-radius:12px;">
+                                    Back to Home
+                                </button>
+                            </div>
+
+                        </div>
+
+                    </div>
                 </div>
+
 
                 <hr class="my-5">
 
                 <!-- TITLE -->
-                <h5 class="text-center fw-bold mb-4">Election In Progress</h5>
+                <div class="d-flex justify-content-between align-items-center mb-4">
+
+                    <h5 class="fw-bold m-0">Election In Progress</h5>
+
+                    <div class="input-group" style="width: 250px;">
+                        <span class="input-group-text">
+                            <i class="bi bi-search"></i>
+                        </span>
+                        <input type="text" class="form-control" placeholder="Search...">
+                    </div>
+
+                </div>
+
+
 
                 <!-- ELECTION CARDS -->
                 <div class="row g-4">
