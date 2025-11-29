@@ -40,15 +40,15 @@
         @include('layouts.navbar')
     </nav>
 
-    <div id="app">
+    <div id="app" class="my-5">
         <main>
             @yield('content')
         </main>
     </div>
 
-    <footer>
+    {{-- <footer>
         @include('layouts.footer')
-    </footer>
+    </footer> --}}
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>

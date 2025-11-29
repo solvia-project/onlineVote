@@ -65,7 +65,7 @@
                             <li class="back-btn">
                                 <div class="mobile-back text-end">
                                     <span>Back</span>
-                                    <i class="fa fa-angle-right ps-2" aria-hidden="true"></i>
+                                    <i class="fa fa-angle-right ps-2"></i>
                                 </div>
                             </li>
 
@@ -112,6 +112,7 @@
 
                             <div class="p-3 text-center"
                                  style="background:#b1d4c7; border-radius:12px;">
+
                                 <p class="text-dark mb-2">Welcome to Election Page</p>
 
                                 <iframe
@@ -121,179 +122,131 @@
                                     frameborder="0"
                                     style="border-radius:8px;">
                                 </iframe>
-                                <p class="mt-3 text-white-50 text-center small">
+
+                                <p class="mt-3 text-white-50 small text-center">
                                     Saturday, 17 November 2027
                                 </p>
+
                             </div>
-
-
 
                         </div>
                     </div>
 
                     <!-- RIGHT SIDE STATS -->
                     <div class="col-lg-8 col-md-6 d-flex">
-    <div class="w-100 d-flex flex-column">
+                        <div class="w-100 d-flex flex-column">
 
-        <div class="row g-4 align-items-stretch flex-grow-1">
+                            <div class="row g-4 align-items-stretch flex-grow-1">
 
-            <!-- CARD 1 -->
-            <div class="col-lg-6 col-md-6 d-flex">
-                <div class="card p-3 text-center h-100 w-100"
-                    style="background:#325246; color:white; border-radius:12px;">
+                                <!-- STAT CARD -->
+                                @for($i=1; $i<=4; $i++)
+                                <div class="col-lg-6 col-md-6 d-flex">
+                                    <div class="card p-3 text-center h-100 w-100"
+                                         style="background:#325246; color:white; border-radius:12px;">
 
-                    <div class="p-3 h-100 d-flex flex-column justify-content-center"
-                        style="background:#b1d4c7; border-radius:12px;">
+                                        <div class="p-3 h-100 d-flex flex-column justify-content-center"
+                                             style="background:#b1d4c7; border-radius:12px;">
 
-                        <p class="mb-2 fw-semibold text-dark">Total Election Joined</p>
-                        <p class="mb-1">
-                            <img src="{{ asset('images/caleg/vote.svg') }}" width="35">
-                            <span class="fw-bold text-dark">20 Votes</span>
-                        </p>
+                                            <p class="mb-2 fw-semibold text-dark">Total Votes Cast</p>
+                                            <p class="mb-1">
+                                                <img src="{{ asset('images/voter/user-check.svg') }}" width="35">
+                                                <span class="fw-bold text-dark">20 Registered Votes</span>
+                                            </p>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                @endfor
+
+                            </div>
+
+                        </div>
                     </div>
 
                 </div>
-            </div>
-
-            <!-- CARD 2 -->
-            <div class="col-lg-6 col-md-6 d-flex">
-                <div class="card p-3 text-center h-100 w-100"
-                    style="background:#325246; color:white; border-radius:12px;">
-
-                    <div class="p-3 h-100 d-flex flex-column justify-content-center"
-                        style="background:#b1d4c7; border-radius:12px;">
-
-                        <p class="mb-2 fw-semibold text-dark">Total Votes Cast</p>
-                        <p class="mb-1">
-                            <img src="{{ asset('images/voter/user-check.svg') }}" width="35">
-                            <span class="fw-bold text-dark">20 Registered Votes</span>
-                        </p>
-                    </div>
-
-                </div>
-            </div>
-
-            <!-- CARD 3 -->
-            <div class="col-lg-6 col-md-6 d-flex">
-                <div class="card p-3 text-center h-100 w-100"
-                    style="background:#325246; color:white; border-radius:12px;">
-
-                    <div class="p-3 h-100 d-flex flex-column justify-content-center"
-                        style="background:#b1d4c7; border-radius:12px;">
-
-                        <p class="mb-2 fw-semibold text-dark">Total Votes Cast</p>
-                        <p class="mb-1">
-                            <img src="{{ asset('images/voter/user-check.svg') }}" width="35">
-                            <span class="fw-bold text-dark">20 Registered Votes</span>
-                        </p>
-                    </div>
-
-                </div>
-            </div>
-
-            <!-- CARD 4 -->
-            <div class="col-lg-6 col-md-6 d-flex">
-                <div class="card p-3 text-center h-100 w-100"
-                    style="background:#325246; color:white; border-radius:12px;">
-
-                    <div class="p-3 h-100 d-flex flex-column justify-content-center"
-                        style="background:#b1d4c7; border-radius:12px;">
-
-                        <p class="mb-2 fw-semibold text-dark">Total Votes Cast</p>
-                        <p class="mb-1">
-                            <img src="{{ asset('images/voter/user-check.svg') }}" width="35">
-                            <span class="fw-bold text-dark">20 Registered Votes</span>
-                        </p>
-                    </div>
-
-                </div>
-            </div>
-
-        </div>
-
-    </div>
-</div>
-
 
                 <hr class="my-5">
-                <div class="d-flex justify-content-between align-items-center mb-4">
-                    <!-- LEFT: Title -->
-                    <div class="flex-1">
-                        <h5 class="fw-bold mb-0">Votes Report</h5>
-                    </div>
 
-                    <!-- RIGHT: Search Bar -->
-                    <div class="flex-1 text-end">
+                {{-- testing --}}
+
+
+
+                <!-- WRAPPER -->
+                <div class="row g-4 p-4" style="border-radius:12px; background:#ffffff;">
+                    <!-- TITLE + SEARCH -->
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h5 class="fw-bold mb-0">Votes Report</h5>
+
                         <input
                             type="text"
                             placeholder="Search..."
-                            class="w-full max-w-xs px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500"
-                        />
+                            class="px-3 py-2 border border-gray-300 rounded-lg"
+                            style="max-width: 250px;">
                     </div>
+                    <!-- LEFT SIDEBAR -->
+                    <div class="col-3 border-end">
+                        <div class="h-100 pe-3">
+
+                            <div class="list-group">
+
+                                @foreach([1,2,3] as $num)
+                                <a class="list-group-item mb-3 text-center" style="border-radius:12px;">
+                                    <p class="fw-bold d-block mb-1" style="font-size:16px; text-decoration:none;">
+                                        Election {{ $num }}
+                                    </p>
+                                    <p class="m-0 fw-semibold">Nurhadi & Aldo</p>
+                                    <p class="m-0 text-muted small">Legislation Department</p>
+                                </a>
+                                @endforeach
+
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                    <!-- RIGHT SIDE ELECTION CARDS -->
+                    <div class="col-xl-9 col-lg-4 col-md-7">
+                        <div class="row g-4">
+
+                            @foreach([1,2,3] as $num)
+                            <div class="col-4">
+                                <div class="card shadow-sm h-100" style="border-radius:12px;">
+
+                                    <!-- HEADER -->
+                                    <div class="text-center p-3">
+                                        <h6 class="fw-bold m-0">
+                                            Election {{ $num }} — Top Candidate
+                                        </h6>
+                                    </div>
+
+                                    <!-- IMAGE -->
+                                    <img src="{{ asset('images/caleg/caleg.png') }}"
+                                        class="card-img-top"
+                                        style="border-radius:12px; padding:40px;">
+
+                                    <!-- BODY -->
+                                    <div class="card-body text-center">
+                                        <p class="fw-bold m-0">Nurhadi & Aldo</p>
+                                        <p class="m-0 fw-semibold" style="font-size:20px;">
+                                            1.000.000.000
+                                        </p>
+                                        <p class="text-muted small">Votes</p>
+                                    </div>
+
+                                </div>
+                            </div>
+                            @endforeach
+
+                        </div>
+                    </div>
+
                 </div>
-
-                <!-- ELECTION CARDS -->
-                <div class="row g-4">
-
-    <!-- LEFT SIDEBAR -->
-    <div class="col-xl-3 col-lg-4 col-md-5">
-        <div class="card h-100 p-3 shadow-sm" style="border-radius:12px;">
-
-            <h6 class="fw-bold mb-3">Election List</h6>
-
-            <div class="list-group">
-
-                @foreach([1,2,3] as $num)
-                    <a href="#"
-                       class="list-group-item list-group-item-action"
-                       style="border-radius:8px; margin-bottom:8px;">
-                        Election {{ $num }}
-                    </a>
-                @endforeach
 
             </div>
 
         </div>
+
     </div>
-
-    <!-- RIGHT SIDE ELECTION CARDS -->
-    <div class="col-xl-9 col-lg-8 col-md-7">
-        <div class="row g-4">
-
-            @foreach([1,2,3] as $num)
-                <div class="col-xl-4 col-md-6">
-                    <div class="card shadow-sm h-100" style="border-radius:12px;">
-
-                        <div class="text-center p-3">
-                            <h6 class="fw-bold m-0">Election {{ $num }} — Top Candidate</h6>
-                        </div>
-
-                        <img src="{{ asset('images/caleg/caleg.png') }}"
-                             class="card-img-top"
-                             style="border-radius:12px; padding:40px 40px 0 40px;">
-
-                        <div class="card-body text-center">
-                            <p class="fw-bold m-0">Nurhadi & Aldo</p>
-                            <p class="m-0 fw-semibold" style="font-size:20px;">1.000.000.000</p>
-                            <p class="text-muted small">Votes</p>
-                        </div>
-
-                    </div>
-                </div>
-            @endforeach
-
-        </div>
-    </div>
-
 </div>
-
-
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
-
 @endsection
