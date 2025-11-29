@@ -36,57 +36,63 @@
                         </div>
                     </div>
 
-                    <!-- RIGHT CONTENT (full height 2 cards + button) -->
-                    <div class="col-lg-8 col-md-6">
+<!-- RIGHT CONTENT (full height 2 cards + button) -->
+<div class="col-lg-8 col-md-6 d-flex">
 
-                        <div class="row g-4 align-items-stretch">
+    <!-- WRAPPER FULL HEIGHT -->
+    <div class="w-100 d-flex flex-column h-100">
 
-                            <!-- CARD 1 -->
-                            <div class="col-lg-6 col-md-6 d-flex">
-                                <div class="card p-3 text-center h-100 w-100"
-                                    style="background:#325246; color:white; border-radius:12px;">
+        <!-- CARDS ROW FULL HEIGHT -->
+        <div class="row g-4 align-items-stretch flex-grow-1">
 
-                                    <div class="p-3 h-100 d-flex flex-column justify-content-center"
-                                        style="background:#b1d4c7; border-radius:12px;">
+            <!-- CARD 1 -->
+            <div class="col-lg-6 col-md-6 d-flex">
+                <div class="card p-3 text-center h-100 w-100"
+                    style="background:#325246; color:white; border-radius:12px;">
 
-                                        <p class="mb-2 fw-semibold text-dark">Total Election Joined</p>
-                                        <p class="mb-1">
-                                            <img src="{{ asset('images/caleg/vote.svg') }}" width="35">
-                                            <span class="fw-bold text-dark">20 Votes</span>
-                                        </p>
-                                    </div>
+                    <div class="p-3 h-100 d-flex flex-column justify-content-center"
+                        style="background:#b1d4c7; border-radius:12px;">
 
-                                </div>
-                            </div>
-
-                            <!-- CARD 2 -->
-                            <div class="col-lg-6 col-md-6 d-flex">
-                                <div class="card p-3 text-center h-100 w-100"
-                                    style="background:#325246; color:white; border-radius:12px;">
-
-                                    <div class="p-3 h-100 d-flex flex-column justify-content-center"
-                                        style="background:#b1d4c7; border-radius:12px;">
-
-                                        <p class="mb-2 fw-semibold text-dark">Total Votes Cast</p>
-                                        <p class="mb-1">
-                                            <img src="{{ asset('images/voter/user-check.svg') }}" width="35">
-                                            <span class="fw-bold text-dark">20 Registered Votes</span>
-                                        </p>
-                                    </div>
-
-                                </div>
-                            </div>
-
-                            <!-- BUTTON -->
-                            <div class="col-12 d-flex justify-content-end">
-                                <button class="btn btn-dark px-4 py-2" style="border-radius:12px;">
-                                    Back to Home
-                                </button>
-                            </div>
-
-                        </div>
-
+                        <p class="mb-2 fw-semibold text-dark">Total Election Joined</p>
+                        <p class="mb-1">
+                            <img src="{{ asset('images/caleg/vote.svg') }}" width="35">
+                            <span class="fw-bold text-dark">20 Votes</span>
+                        </p>
                     </div>
+
+                </div>
+            </div>
+
+            <!-- CARD 2 -->
+            <div class="col-lg-6 col-md-6 d-flex">
+                <div class="card p-3 text-center h-100 w-100"
+                    style="background:#325246; color:white; border-radius:12px;">
+
+                    <div class="p-3 h-100 d-flex flex-column justify-content-center"
+                        style="background:#b1d4c7; border-radius:12px;">
+
+                        <p class="mb-2 fw-semibold text-dark">Total Votes Cast</p>
+                        <p class="mb-1">
+                            <img src="{{ asset('images/voter/user-check.svg') }}" width="35">
+                            <span class="fw-bold text-dark">20 Registered Votes</span>
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <!-- BUTTON ALWAYS AT BOTTOM -->
+        <div class="mt-3 text-end">
+            <button class="btn btn-dark px-4 py-2" style="border-radius:12px;">
+                Back to Home
+            </button>
+        </div>
+
+    </div>
+</div>
+
                 </div>
 
 

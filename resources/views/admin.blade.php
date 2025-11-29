@@ -108,7 +108,7 @@
                              style="background:#325246; color:white; border-radius:12px; height:100%;">
 
                             <h6 class="fw-bold text-white mb-2">Hi, Ainun Faturrahman</h6>
-                            <p class="text-white-50 mb-3">Hari ini: Gapur/Ga Jamal</p>
+                            <p class="text-white-50 mb-3">The Most Handsome Admin!!!</p>
 
                             <div class="p-3 text-center"
                                  style="background:#b1d4c7; border-radius:12px;">
@@ -121,78 +121,99 @@
                                     frameborder="0"
                                     style="border-radius:8px;">
                                 </iframe>
+                                <p class="mt-3 text-white-50 text-center small">
+                                    Saturday, 17 November 2027
+                                </p>
                             </div>
 
-                            <p class="mt-3 text-white-50 text-center small">
-                                Saturday, 17 November 2027
-                            </p>
+
 
                         </div>
                     </div>
 
                     <!-- RIGHT SIDE STATS -->
-                    <div class="col-xl-9 col-lg-8 col-md-7">
-                        <div class="row g-4 h-100">
+                    <div class="col-lg-8 col-md-6 d-flex">
+    <div class="w-100 d-flex flex-column">
 
-                            <!-- CARD 1 -->
-                            <div class="col-md-6 h-full">
-                                <div class="card income-card card-primary">
-                                    <div class="card-body text-center">
-                                        <h5>8,50,49</h5>
-                                        <p>Total Election Joined</p>
-                                        <a class="btn-arrow arrow-primary" href="javascript:void(0)">
-                                            <i class="toprightarrow-primary fa fa-arrow-up me-2"></i>
-                                            95.54%
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
+        <div class="row g-4 align-items-stretch flex-grow-1">
 
-                            <!-- CARD 2 -->
-                            <div class="col-md-6">
-                                <div class="card income-card card-primary">
-                                    <div class="card-body text-center">
-                                        <h5>24</h5>
-                                        <p>Upcoming Elections</p>
-                                        <a class="btn-arrow arrow-primary" href="javascript:void(0)">
-                                            <i class="toprightarrow-primary fa fa-arrow-up me-2"></i>
-                                            80.12%
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
+            <!-- CARD 1 -->
+            <div class="col-lg-6 col-md-6 d-flex">
+                <div class="card p-3 text-center h-100 w-100"
+                    style="background:#325246; color:white; border-radius:12px;">
 
-                            <!-- CARD 3 -->
-                            <div class="col-md-6">
-                                <div class="card income-card card-primary">
-                                    <div class="card-body text-center">
-                                        <h5>12</h5>
-                                        <p>Completed Elections</p>
-                                        <a class="btn-arrow arrow-primary" href="javascript:void(0)">
-                                            <i class="toprightarrow-primary fa fa-arrow-up me-2"></i>
-                                            60.44%
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
+                    <div class="p-3 h-100 d-flex flex-column justify-content-center"
+                        style="background:#b1d4c7; border-radius:12px;">
 
-                            <!-- CARD 4 -->
-                            <div class="col-md-6">
-                                <div class="card income-card card-primary">
-                                    <div class="card-body text-center">
-                                        <h5>5</h5>
-                                        <p>Active Elections</p>
-                                        <a class="btn-arrow arrow-primary" href="javascript:void(0)">
-                                            <i class="toprightarrow-primary fa fa-arrow-up me-2"></i>
-                                            72.33%
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
+                        <p class="mb-2 fw-semibold text-dark">Total Election Joined</p>
+                        <p class="mb-1">
+                            <img src="{{ asset('images/caleg/vote.svg') }}" width="35">
+                            <span class="fw-bold text-dark">20 Votes</span>
+                        </p>
                     </div>
+
                 </div>
+            </div>
+
+            <!-- CARD 2 -->
+            <div class="col-lg-6 col-md-6 d-flex">
+                <div class="card p-3 text-center h-100 w-100"
+                    style="background:#325246; color:white; border-radius:12px;">
+
+                    <div class="p-3 h-100 d-flex flex-column justify-content-center"
+                        style="background:#b1d4c7; border-radius:12px;">
+
+                        <p class="mb-2 fw-semibold text-dark">Total Votes Cast</p>
+                        <p class="mb-1">
+                            <img src="{{ asset('images/voter/user-check.svg') }}" width="35">
+                            <span class="fw-bold text-dark">20 Registered Votes</span>
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- CARD 3 -->
+            <div class="col-lg-6 col-md-6 d-flex">
+                <div class="card p-3 text-center h-100 w-100"
+                    style="background:#325246; color:white; border-radius:12px;">
+
+                    <div class="p-3 h-100 d-flex flex-column justify-content-center"
+                        style="background:#b1d4c7; border-radius:12px;">
+
+                        <p class="mb-2 fw-semibold text-dark">Total Votes Cast</p>
+                        <p class="mb-1">
+                            <img src="{{ asset('images/voter/user-check.svg') }}" width="35">
+                            <span class="fw-bold text-dark">20 Registered Votes</span>
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- CARD 4 -->
+            <div class="col-lg-6 col-md-6 d-flex">
+                <div class="card p-3 text-center h-100 w-100"
+                    style="background:#325246; color:white; border-radius:12px;">
+
+                    <div class="p-3 h-100 d-flex flex-column justify-content-center"
+                        style="background:#b1d4c7; border-radius:12px;">
+
+                        <p class="mb-2 fw-semibold text-dark">Total Votes Cast</p>
+                        <p class="mb-1">
+                            <img src="{{ asset('images/voter/user-check.svg') }}" width="35">
+                            <span class="fw-bold text-dark">20 Registered Votes</span>
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
 
                 <hr class="my-5">
                 <div class="flex flex-row justify-between items-center gap-4">
