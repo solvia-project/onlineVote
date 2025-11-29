@@ -10,16 +10,18 @@
 <div class="page-wrapper compact-sidebar" id="pageWrapper">
 
     <!-- PAGE BODY -->
-    <div class="page-body-wrapper sidebar-icon">
+    <div class="sidebar-icon">
         <div class="mt-5 mx-5">
             <div class="container-fluid">
 
                 <!-- TITLE CENTER -->
-                <div class="flex justify-between">
-                <h5 class="text-start fw-bold mb-4">Pemilihan Kepala Daerah Jakarta</h5>
-                <div>
-                    <p>Category : <span class="badge bg-success">Politik</span></p>
-                </div>
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h5 class="fw-bold m-0">Pemilihan Kepala Daerah Jakarta</h5>
+
+                    <p class="m-0">
+                        Category :
+                        <span class="badge bg-success">Politik</span>
+                    </p>
                 </div>
 
                 <!-- 3 CARDS -->
