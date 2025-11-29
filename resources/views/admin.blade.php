@@ -216,7 +216,7 @@
 
 
                 <hr class="my-5">
-                <div class="flex flex-row justify-between items-center gap-4">
+                <div class="d-flex justify-content-between align-items-center mb-4">
                     <!-- LEFT: Title -->
                     <div class="flex-1">
                         <h5 class="fw-bold mb-0">Votes Report</h5>
@@ -234,33 +234,59 @@
 
                 <!-- ELECTION CARDS -->
                 <div class="row g-4">
-                    <div class="w-1/4 bg-gray-100 rounded-lg p-4 flex flex-col gap-2">
-                        <p></p>
-                    </div>
 
-                    @foreach([1,2,3] as $num)
-                        <div class="col-xl-4 col-md-6">
-                            <div class="card shadow-sm h-100" style="border-radius:12px;">
+    <!-- LEFT SIDEBAR -->
+    <div class="col-xl-3 col-lg-4 col-md-5">
+        <div class="card h-100 p-3 shadow-sm" style="border-radius:12px;">
 
-                                <div class="text-center p-3">
-                                    <h6 class="fw-bold m-0">Election {{ $num }} — Top Candidate</h6>
-                                </div>
+            <h6 class="fw-bold mb-3">Election List</h6>
 
-                                <img src="{{ asset('images/caleg/caleg.png') }}"
-                                     class="card-img-top"
-                                     style="border-radius:12px; padding:40px 40px 0 40px;">
+            <div class="list-group">
 
-                                <div class="card-body text-center">
-                                    <p class="fw-bold m-0">Nurhadi & Aldo</p>
-                                    <p class="m-0 fw-semibold" style="font-size:20px;">1.000.000.000</p>
-                                    <p class="text-muted small">Votes</p>
-                                </div>
+                @foreach([1,2,3] as $num)
+                    <a href="#"
+                       class="list-group-item list-group-item-action"
+                       style="border-radius:8px; margin-bottom:8px;">
+                        Election {{ $num }}
+                    </a>
+                @endforeach
 
-                            </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- RIGHT SIDE ELECTION CARDS -->
+    <div class="col-xl-9 col-lg-8 col-md-7">
+        <div class="row g-4">
+
+            @foreach([1,2,3] as $num)
+                <div class="col-xl-4 col-md-6">
+                    <div class="card shadow-sm h-100" style="border-radius:12px;">
+
+                        <div class="text-center p-3">
+                            <h6 class="fw-bold m-0">Election {{ $num }} — Top Candidate</h6>
                         </div>
-                    @endforeach
 
+                        <img src="{{ asset('images/caleg/caleg.png') }}"
+                             class="card-img-top"
+                             style="border-radius:12px; padding:40px 40px 0 40px;">
+
+                        <div class="card-body text-center">
+                            <p class="fw-bold m-0">Nurhadi & Aldo</p>
+                            <p class="m-0 fw-semibold" style="font-size:20px;">1.000.000.000</p>
+                            <p class="text-muted small">Votes</p>
+                        </div>
+
+                    </div>
                 </div>
+            @endforeach
+
+        </div>
+    </div>
+
+</div>
+
 
             </div>
 
