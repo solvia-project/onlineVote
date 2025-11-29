@@ -43,13 +43,13 @@
                         </div>
 
                         <div class="form-group d-flex align-items-center gap-2">
-                            <a class="link" href="/forgot-password">Forgot password?</a>
+                            <p>Forgot password? <a class="link" href="/forgot-password">Click Here.</a></p>
                         </div>
 
                         <button class="btn btn-primary btn-block" type="submit">Sign in</button>
 
                         <p class="mt-3">
-                            Don't have an account?
+                            Have account yet?
                             <a href="/register">Register here.</a>
                         </p>
                     </form>
