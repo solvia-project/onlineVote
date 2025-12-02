@@ -14,7 +14,7 @@
                     <ul class="navbar-nav ms-auto">
                         @guest
                         <li class="onhover-dropdown p-0">
-                        <button class="btn btn-primary-light" type="button"><i data-feather="log-out"></i>Log out</button>
+                        <button class="btn btn-primary-light" type="button" onclick="window.location='/login'"><i data-feather="log-out"></i>Log out</button>
                         </li>
                             @if (Route::has('register'))
                                 <li class="nav-item">
