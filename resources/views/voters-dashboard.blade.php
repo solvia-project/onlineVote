@@ -85,7 +85,7 @@
 
         <!-- BUTTON ALWAYS AT BOTTOM -->
         <div class="mt-3 text-end">
-            <button class="btn btn-dark px-4 py-2" style="border-radius:12px;">
+            <button class="btn btn-dark px-4 py-2" style="border-radius:12px;" onclick="window.location='/dashboard'">
                 Back to Home
             </button>
         </div>
