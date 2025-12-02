@@ -54,7 +54,10 @@
                             the functioning of government.
                         </p>
 
-                        <button class="btn btn-success mt-3">🗳 Vote Now</button>
+                        <button class="btn btn-success mt-3" onclick="window.location='/vote-page'">
+                            🗳 Vote Now
+                        </button>
+
 
                     </div>
                 </div>
@@ -67,38 +70,43 @@
                 <!-- 3 CARDS -->
                 <div class="row g-4">
 
-                    @foreach([1,2,3] as $num)
-                    <div class="col-xl-4 col-md-6">
-                        <div class="card shadow-sm position-relative" style="border-radius:12px;">
+    @foreach([1,2,3] as $num)
+    <div class="col-xl-4 col-md-6">
 
-                            <!-- LABEL -->
-                            <span class="badge bg-success position-absolute top-0 end-0 m-2">
-                                Politik
-                            </span>
+        <a href="/voters-dashboard" class="text-decoration-none text-dark">
+            <div class="card shadow-sm position-relative" style="border-radius:12px; cursor:pointer;">
 
-                            <!-- IMAGE -->
-                            <img
-                                src="{{ asset('images/caleg/caleg.png') }}"
-                                class="card-img-top"
-                                alt="Candidate"
-                                style="
-                                    border-top-left-radius:12px;
-                                    border-top-right-radius:12px;
-                                    padding:40px 40px 0 40px;
-                                "
-                            >
+                <!-- LABEL -->
+                <span class="badge bg-success position-absolute top-0 end-0 m-2">
+                    Politik
+                </span>
 
-                            <!-- CARD BODY -->
-                            <div class="card-body text-center">
-                                <p class="fw-bold m-0">Pemilihan Kepala Daerah Jakarta</p>
-                                <p class="text-muted small m-0">Deadline : 14 Juli 2025</p>
-                            </div>
+                <!-- IMAGE -->
+                <img
+                    src="{{ asset('images/caleg/caleg.png') }}"
+                    class="card-img-top"
+                    alt="Candidate"
+                    style="
+                        border-top-left-radius:12px;
+                        border-top-right-radius:12px;
+                        padding:40px 40px 0 40px;
+                    "
+                >
 
-                        </div>
-                    </div>
-                    @endforeach
-
+                <!-- BODY -->
+                <div class="card-body text-center">
+                    <p class="fw-bold m-0">Pemilihan Kepala Daerah Jakarta</p>
+                    <p class="text-muted small m-0">Deadline : 14 Juli 2025</p>
                 </div>
+
+            </div>
+        </a>
+
+    </div>
+    @endforeach
+
+</div>
+
 
             </div>
         </div>
