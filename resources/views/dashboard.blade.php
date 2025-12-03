@@ -106,18 +106,6 @@
                     </div>
                     @endforeach
 
-                <!-- BODY -->
-                <div class="card-body text-center">
-                    <p class="fw-bold m-0">Pemilihan Kepala Daerah Jakarta</p>
-                    <p class="text-muted small m-0">Deadline : 14 Juli 2025</p>
-                </div>
-
-            </div>
-        </a>
-
-    </div>
-    @endforeach
-
 </div>
 
 

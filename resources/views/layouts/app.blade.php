@@ -74,6 +74,7 @@
     <script src="/js/datatable/datatables/datatable.custom.js"></script>
     <script src="/js/tooltip-init.js"></script>
 
+
     @stack('scripts')
 </body>
 
