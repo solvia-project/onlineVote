@@ -1,44 +1,54 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Admin</title>
 
-    <link rel="icon" href="/images/favicon.png" type="image/x-icon">
-    <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+        @hasSection('title')
+        <title>@yield('title') - {{ config('app.name', 'Laravel') }}</title>
+        @else
+        <title>{{ config('app.name', 'Laravel') }}</title>
+        @endif
 
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="/fonts/Montserrat.css" rel="stylesheet">
-    <link href="/fonts/Roboto.css" rel="stylesheet">
-    <link href="/fonts/Rubik.css" rel="stylesheet">
+        <link rel="icon" href="/images/favicon.png" type="image/x-icon">
+        <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon">
 
-    <!-- Icons & CSS -->
-    <link rel="stylesheet" href="/css/fontawesome.css">
-    <link rel="stylesheet" href="/css/icofont.css">
-    <link rel="stylesheet" href="/css/themify.css">
-    <link rel="stylesheet" href="/css/flag-icon.css">
-    <link rel="stylesheet" href="/css/feather-icon.css">
-    <link rel="stylesheet" type="text/css" href="/css/datatables.css">
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="/css/bootstrap.css">
+        <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="/fonts/Montserrat.css" rel="stylesheet">
+        <link href="/fonts/Roboto.css" rel="stylesheet">
+        <link href="/fonts/Rubik.css" rel="stylesheet">
 
-    <!-- Main Style -->
-    <link rel="stylesheet" href="/css/style.css">
-    <link id="color" rel="stylesheet" href="/css/color-1.css">
-    <link rel="stylesheet" href="/css/responsive.css">
+        <!-- Icons & CSS -->
+        <link rel="stylesheet" href="/css/fontawesome.css">
+        <link rel="stylesheet" href="/css/icofont.css">
+        <link rel="stylesheet" href="/css/themify.css">
+        <link rel="stylesheet" href="/css/flag-icon.css">
+        <link rel="stylesheet" href="/css/feather-icon.css">
+        <link rel="stylesheet" type="text/css" href="/css/datatables.css">
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="/css/bootstrap.css">
 
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    @stack('styles')
-</head>
+        <!-- Main Style -->
+        <link rel="stylesheet" href="/css/style.css">
+        <link id="color" rel="stylesheet" href="/css/color-1.css">
+        <link rel="stylesheet" href="/css/responsive.css">
+
+        <!-- Styles -->
+        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+        @stack('styles')
+    </head>
+
 <body>
+    @unless (request()->routeIs('home', 'login', 'register') || request()->is('admin/*'))
     <nav>
         @include('layouts.navbar')
     </nav>
+    @endunless
 
     <div id="app" class="my-5">
         <main>
@@ -66,4 +76,5 @@
 
     @stack('scripts')
 </body>
+
 </html>

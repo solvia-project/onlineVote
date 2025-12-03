@@ -1,5 +1,6 @@
 @extends('layouts.app')
 
+@section('title', 'Admin Dashboard')
 @section('content')
 
 <!-- Loader -->
@@ -23,7 +24,7 @@
             <div class="nav-right col pull-right right-menu p-0">
                 <ul class="nav-menus">
                     <li class="onhover-dropdown p-0">
-                        <button class="btn btn-primary-light" type="button">
+                        <button class="btn btn-primary-light btn-logout" type="button">
                             <i data-feather="log-out"></i> Log out
                         </button>
                     </li>
@@ -45,12 +46,12 @@
 
             <div class="sidebar-user text-center">
                 <img class="img-90 rounded-circle"
-                     src="https://laravel.pixelstrap.com/viho/assets/images/dashboard/1.png"
-                     alt="" />
+                    src="{{ asset('images/dashboard/boy-2.png') }}"
+                    alt="Avatar" />
                 <a href="user-profile">
-                    <h6 class="mt-3 f-14 f-w-600">Emay Walter</h6>
+                    <h6 class="mt-3 f-14 f-w-600">{{ Auth::check() ? Auth::user()->name : 'User' }}</h6>
                 </a>
-                <p class="mb-0 font-roboto">Admin</p>
+                <p class="mb-0 font-roboto">{{ ucfirst(Auth::check() ? (Auth::user()->role ?? 'user') : 'user') }}</p>
             </div>
 
             <nav>
@@ -105,13 +106,13 @@
                     <!-- LEFT PROFILE -->
                     <div class="col-xl-3 col-lg-4 col-md-5">
                         <div class="card p-3"
-                             style="background:#325246; color:white; border-radius:12px; height:100%;">
+                            style="background:#325246; color:white; border-radius:12px; height:100%;">
 
-                            <h6 class="fw-bold text-white mb-2">Hi, Ainun Faturrahman</h6>
-                            <p class="text-white-50 mb-3">The Most Handsome Admin!!!</p>
+                            <h6 class="fw-bold text-white mb-2">Hi, {{ Auth::user()->name }}</h6>
+                            <p class="text-white-50 mb-3">Welcome back, {{ ucfirst(Auth::user()->role ?? 'user') }}</p>
 
                             <div class="p-3 text-center"
-                                 style="background:#b1d4c7; border-radius:12px;">
+                                style="background:#b1d4c7; border-radius:12px;">
 
                                 <p class="text-dark mb-2">Welcome to Election Page</p>
 
@@ -124,7 +125,7 @@
                                 </iframe>
 
                                 <p class="mt-3 text-white-50 small text-center">
-                                    Saturday, 17 November 2027
+                                    {{ now()->format('l, d F Y') }}
                                 </p>
 
                             </div>
@@ -139,24 +140,25 @@
                             <div class="row g-4 align-items-stretch flex-grow-1">
 
                                 <!-- STAT CARD -->
-                                @for($i=1; $i<=4; $i++)
+                                @php($cards = [
+                                ['label' => 'Total Elections', 'value' => $stats['totalElections'] ?? 0],
+                                ['label' => 'Active Elections', 'value' => $stats['activeElections'] ?? 0],
+                                ['label' => 'Total Candidates', 'value' => $stats['totalCandidates'] ?? 0],
+                                ['label' => 'Total Votes Cast', 'value' => $stats['totalVotes'] ?? 0],
+                                ])
+                                @foreach($cards as $card)
                                 <div class="col-lg-6 col-md-6 d-flex">
-                                    <div class="card p-3 text-center h-100 w-100"
-                                         style="background:#325246; color:white; border-radius:12px;">
-
-                                        <div class="p-3 h-100 d-flex flex-column justify-content-center"
-                                             style="background:#b1d4c7; border-radius:12px;">
-
-                                            <p class="mb-2 fw-semibold text-dark">Total Votes Cast</p>
+                                    <div class="card p-3 text-center h-100 w-100" style="background:#325246; color:white; border-radius:12px;">
+                                        <div class="p-3 h-100 d-flex flex-column justify-content-center" style="background:#b1d4c7; border-radius:12px;">
+                                            <p class="mb-2 fw-semibold text-dark">{{ $card['label'] }}</p>
                                             <p class="mb-1">
                                                 <img src="{{ asset('images/voter/user-check.svg') }}" width="35">
-                                                <span class="fw-bold text-dark">20 Registered Votes</span>
+                                                <span class="fw-bold text-dark">{{ number_format($card['value']) }}</span>
                                             </p>
                                         </div>
-
                                     </div>
                                 </div>
-                                @endfor
+                                @endforeach
 
                             </div>
 
@@ -178,6 +180,7 @@
                         <h5 class="fw-bold mb-0">Votes Report</h5>
 
                         <input
+                            id="dashboardSearch"
                             type="text"
                             placeholder="Search..."
                             class="px-3 py-2 border border-gray-300 rounded-lg"
@@ -188,17 +191,20 @@
                         <div class="h-100 pe-3">
 
                             <div class="list-group">
-
-                                @foreach([1,2,3] as $num)
-                                <a class="list-group-item mb-3 text-center" style="border-radius:12px;">
+                                @forelse($elections ?? [] as $e)
+                                @php($top = $topCandidates[$e->id] ?? null)
+                                <a class="list-group-item mb-3 text-center" style="border-radius:12px;"
+                                    data-e-name="{{ strtolower($e->name) }}"
+                                    data-e-cand="{{ strtolower(optional($top)->name ?? '') }}">
                                     <p class="fw-bold d-block mb-1" style="font-size:16px; text-decoration:none;">
-                                        Election {{ $num }}
+                                        {{ $e->name }}
                                     </p>
-                                    <p class="m-0 fw-semibold">Nurhadi & Aldo</p>
-                                    <p class="m-0 text-muted small">Legislation Department</p>
+                                    <p class="m-0 fw-semibold">{{ optional($topCandidates[$e->id] ?? null)->name ?? '—' }}</p>
+                                    <p class="m-0 text-muted small">{{ number_format($e->votes_count) }} Votes</p>
                                 </a>
-                                @endforeach
-
+                                @empty
+                                <div class="text-center text-muted">No elections</div>
+                                @endforelse
                             </div>
 
 
@@ -207,29 +213,32 @@
 
                     <!-- RIGHT SIDE ELECTION CARDS -->
                     <div class="col-xl-9 col-lg-4 col-md-7">
-                        <div class="row g-4">
+                        <div class="row g-4" id="electionCards">
 
-                            @foreach([1,2,3] as $num)
-                            <div class="col-4">
+                            @foreach(($elections ?? []) as $e)
+                            @php($top = $topCandidates[$e->id] ?? null)
+                            <div class="col-4"
+                                data-e-name="{{ strtolower($e->name) }}"
+                                data-e-cand="{{ strtolower(optional($top)->name ?? '') }}">
                                 <div class="card shadow-sm h-100" style="border-radius:12px;">
 
                                     <!-- HEADER -->
                                     <div class="text-center p-3">
                                         <h6 class="fw-bold m-0">
-                                            Election {{ $num }} — Top Candidate
+                                            {{ $e->name }}
                                         </h6>
                                     </div>
 
                                     <!-- IMAGE -->
-                                    <img src="{{ asset('images/caleg/caleg.png') }}"
+                                    <img src="{{ $top && $top->image_path ? (\Illuminate\Support\Str::startsWith($top->image_path, ['http', '/storage']) ? $top->image_path : Storage::url(trim($top->image_path, '/'))) : asset('images/caleg/caleg.png') }}"
                                         class="card-img-top"
                                         style="border-radius:12px; padding:40px;">
 
                                     <!-- BODY -->
                                     <div class="card-body text-center">
-                                        <p class="fw-bold m-0">Nurhadi & Aldo</p>
+                                        <p class="fw-bold m-0">{{ $top->name ?? '—' }}</p>
                                         <p class="m-0 fw-semibold" style="font-size:20px;">
-                                            1.000.000.000
+                                            {{ number_format($top->votes_count ?? 0) }}
                                         </p>
                                         <p class="text-muted small">Votes</p>
                                     </div>
@@ -249,4 +258,53 @@
 
     </div>
 </div>
+</div>
+</div>
 @endsection
+
+@push('scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const input = document.getElementById('dashboardSearch');
+        if (!input) return;
+        const leftItems = document.querySelectorAll('.list-group .list-group-item[data-e-name]');
+        const rightItems = document.querySelectorAll('#electionCards [data-e-name]');
+        const filter = (q) => {
+            const term = (q || '').toLowerCase().trim();
+            leftItems.forEach(el => {
+                const name = el.dataset.eName || '';
+                const cand = el.dataset.eCand || '';
+                const match = !term || name.includes(term) || cand.includes(term);
+                el.style.display = match ? '' : 'none';
+            });
+            rightItems.forEach(el => {
+                const name = el.dataset.eName || '';
+                const cand = el.dataset.eCand || '';
+                const match = !term || name.includes(term) || cand.includes(term);
+                el.style.display = match ? '' : 'none';
+            });
+        };
+        input.addEventListener('input', (e) => filter(e.target.value));
+
+        document.querySelectorAll('.btn-logout').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const form = document.getElementById('logout-form');
+                if (form) {
+                    form.submit();
+                    return;
+                }
+                const f = document.createElement('form');
+                f.method = 'POST';
+                f.action = '/logout';
+                const csrf = document.createElement('input');
+                csrf.type = 'hidden';
+                csrf.name = '_token';
+                csrf.value = '{{ csrf_token() }}';
+                f.appendChild(csrf);
+                document.body.appendChild(f);
+                f.submit();
+            });
+        });
+    });
+</script>
+@endpush
