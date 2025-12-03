@@ -1,5 +1,6 @@
 @extends('layouts.app')
 
+@section('title', 'Dashboard')
 @section('content')
 
 <!-- Loader -->
@@ -19,7 +20,7 @@
                     <div class="col-xl-3 col-lg-4 col-md-5 mb-4">
                         <div class="card p-3" style="background:#325246; color:white; border-radius:12px;">
 
-                            <h6 class="fw-bold text-white mb-1">Hi, Ainun Faturrahman</h6>
+                            <h6 class="fw-bold text-white mb-1">Hi, {{ Auth::check() ? Auth::user()->name : 'Guest' }}</h6>
                             <p class="text-white-50 mb-3">Hari Gini Golput Ga Jaman!</p>
 
                             <div style="background:#b1d4c7; border-radius:12px;" class="p-2 text-center">
@@ -32,7 +33,7 @@
                                     style="border-radius:8px;">
                                 </iframe>
                                 <p class="mt-3 text-white-50 text-center small">
-                                    Saturday, 17 November 2027
+                                    {{ now()->format('l, d F Y') }}
                                 </p>
                             </div>
 
@@ -54,10 +55,7 @@
                             the functioning of government.
                         </p>
 
-                        <button class="btn btn-success mt-3" onclick="window.location='/vote-page'">
-                            🗳 Vote Now
-                        </button>
-
+                        <a href="#voteTitle" class="btn btn-success mt-3">🗳 Vote Now</a>
 
                     </div>
                 </div>
@@ -65,33 +63,48 @@
                 <hr class="my-4">
 
                 <!-- TITLE CENTER -->
-                <h5 class="text-center fw-bold mb-4">Select Election To Vote!</h5>
+                <h5 id="voteTitle" class="text-center fw-bold mb-4">Select Election To Vote!</h5>
 
                 <!-- 3 CARDS -->
                 <div class="row g-4">
 
-    @foreach([1,2,3] as $num)
-    <div class="col-xl-4 col-md-6">
+                    @foreach($elections as $election)
+                    <div class="col-xl-4 col-md-6">
+                        <div class="card shadow-sm position-relative" style="border-radius:12px;">
 
-        <a href="/voters-dashboard" class="text-decoration-none text-dark">
-            <div class="card shadow-sm position-relative" style="border-radius:12px; cursor:pointer;">
+                            <!-- LABEL -->
+                            <span class="badge bg-success position-absolute top-0 end-0 m-2">
+                                {{ $election->category ?? '—' }}
+                            </span>
 
-                <!-- LABEL -->
-                <span class="badge bg-success position-absolute top-0 end-0 m-2">
-                    Politik
-                </span>
+                            <!-- IMAGE -->
+                            @if(!empty($election && $election->candidates->first()->image_path ? (\Illuminate\Support\Str::startsWith($election->candidates->first()->image_path, ['http', '/storage']) ? $election->candidates->first()->image_path : Storage::url(trim($election->candidates->first()->image_path, '/'))) : asset('images/caleg/caleg.png')))
+                            <img
+                                src="{{ $election && $election->candidates->first()->image_path ? (\Illuminate\Support\Str::startsWith($election->candidates->first()->image_path, ['http', '/storage']) ? $election->candidates->first()->image_path : Storage::url(trim($election->candidates->first()->image_path, '/'))) : asset('images/caleg/caleg.png') }}"
+                                class="card-img-top"
+                                alt="Candidate"
+                                style="
+                                        border-top-left-radius:12px;
+                                        border-top-right-radius:12px;
+                                        padding:40px 40px 0 40px;
+                                    ">
+                            @else
+                            <div class="card-img-top d-flex align-items-center justify-content-center"
+                                style="border-radius:12px; padding:40px; height:200px;">
+                                <span class="text-muted small">Gambar tidak tersedia</span>
+                            </div>
+                            @endif
 
-                <!-- IMAGE -->
-                <img
-                    src="{{ asset('images/caleg/caleg.png') }}"
-                    class="card-img-top"
-                    alt="Candidate"
-                    style="
-                        border-top-left-radius:12px;
-                        border-top-right-radius:12px;
-                        padding:40px 40px 0 40px;
-                    "
-                >
+                            <!-- CARD BODY -->
+                            <div class="card-body text-center">
+                                <p class="fw-bold m-0">{{ $election->name }}</p>
+                                <p class="text-muted small m-0">Deadline : {{ $election->end_at ? \Illuminate\Support\Carbon::parse($election->end_at)->format('d M Y H:i') : '—' }}</p>
+                                <a class="btn btn-dark mt-2" href="{{ Auth::check() ? '/vote-page?election_id='.$election->id : route('login') }}">Vote Now</a>
+                            </div>
+
+                        </div>
+                    </div>
+                    @endforeach
 
                 <!-- BODY -->
                 <div class="card-body text-center">

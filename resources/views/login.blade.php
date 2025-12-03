@@ -1,5 +1,6 @@
 @extends('layouts.app')
 
+@section('title', 'Login')
 @section('content')
 <!-- Loader Start -->
 <div class="loader-wrapper">
@@ -9,12 +10,12 @@
 </div>
 <!-- Loader End -->
 
-<section>
+<section class="auth-section">
     <div class="container-fluid p-0">
-        <div class="row">
+        <div class="row justify-content-center align-items-center" style="min-height:100vh;">
             <div class="col-12">
                 <div class="login-card">
-                    <form class="theme-form login-form">
+                    <form class="theme-form login-form" method="POST" action="{{ route('login.attempt') }}">
                         @csrf
                         <h4>Login</h4>
                         <h6>Welcome! Log in to Vote.</h6>
@@ -58,4 +59,19 @@
         </div>
     </div>
 </section>
+@push('styles')
+<style>
+    #app {
+        margin-top: 0 !important;
+        margin-bottom: 0 !important
+    }
+
+    .auth-section {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center
+    }
+</style>
+@endpush
 @endsection
