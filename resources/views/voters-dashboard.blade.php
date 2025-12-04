@@ -96,19 +96,11 @@
                     </div>
 
                 </div>
-
-
                 <hr class="my-5">
-
                 <!-- TITLE -->
                 <div class="d-flex justify-content-between align-items-center mb-4">
-
                     <h5 class="fw-bold m-0">Election In Progress</h5>
-
                     <div class="input-group" style="width: 250px;">
-                        <span class="input-group-text">
-                            <i class="bi bi-search"></i>
-                        </span>
                         <input id="votersSearch" type="text" class="form-control" placeholder="Search...">
                     </div>
 
