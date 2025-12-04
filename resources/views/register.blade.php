@@ -34,7 +34,6 @@
                         <div class="form-group">
                             <label>Your Name</label>
                             <div class="input-group">
-                                <span class="input-group-text"><i class="icon-user"></i></span>
                                 <input class="form-control @error('name') is-invalid @enderror" type="text" name="name" required placeholder="Your Name" value="{{ old('name') }}">
                             </div>
                             @error('name')
@@ -46,7 +45,6 @@
                         <div class="form-group">
                             <label>Place of Birth</label>
                             <div class="input-group">
-                                <span class="input-group-text"><i class="icon-location-pin"></i></span>
                                 <input class="form-control @error('place_of_birth') is-invalid @enderror" type="text" name="place_of_birth" required placeholder="Place of birth" value="{{ old('place_of_birth') }}">
                             </div>
                             @error('place_of_birth')
@@ -58,7 +56,6 @@
                         <div class="form-group">
                             <label>Date of Birth</label>
                             <div class="input-group">
-                                <span class="input-group-text"><i class="icon-calendar"></i></span>
                                 <input class="form-control @error('date_of_birth') is-invalid @enderror" type="date" name="date_of_birth" required value="{{ old('date_of_birth') }}">
                             </div>
                             @error('date_of_birth')
@@ -96,7 +93,6 @@
                         <div class="form-group">
                             <label>Email Address</label>
                             <div class="input-group">
-                                <span class="input-group-text"><i class="icon-email"></i></span>
                                 <input class="form-control @error('email') is-invalid @enderror" type="email" name="email" required placeholder="example@email.com" value="{{ old('email') }}">
                             </div>
                             @error('email')
@@ -105,36 +101,42 @@
                         </div>
 
                         {{-- Password --}}
-                        <div class="form-group">
-                            <label>Password</label>
-                            <div class="input-group">
-                                <span class="input-group-text"><i class="icon-lock"></i></span>
-                                <input class="form-control @error('password') is-invalid @enderror" type="password" name="password" required placeholder="********">
-                                <div class="show-hide"><span class="show"></span></div>
-                            </div>
-                            @error('password')
-                            <div class="invalid-feedback d-block">{{ $message }}</div>
-                            @enderror
-                        </div>
+<div class="form-group">
+    <label>Password</label>
+    <div class="input-group">
+        <input class="form-control @error('password') is-invalid @enderror"
+               type="password" name="password" id="password" required placeholder="********">
 
-                        {{-- Re-enter Password --}}
-                        <div class="form-group">
-                            <label>Re-Enter Password</label>
-                            <div class="input-group">
-                                <span class="input-group-text"><i class="icon-lock"></i></span>
-                                <input class="form-control @error('password_confirmation') is-invalid @enderror" type="password" name="password_confirmation" required placeholder="********">
-                                <div class="show-hide"><span class="show"></span></div>
-                            </div>
-                            @error('password_confirmation')
-                            <div class="invalid-feedback d-block">{{ $message }}</div>
-                            @enderror
-                        </div>
+        <span class="input-group-text toggle-password" data-target="#password" style="cursor:pointer;">
+            show
+        </span>
+    </div>
+    @error('password')
+    <div class="invalid-feedback d-block">{{ $message }}</div>
+    @enderror
+</div>
+
+{{-- Re-enter Password --}}
+<div class="form-group">
+    <label>Re-Enter Password</label>
+    <div class="input-group">
+        <input class="form-control @error('password_confirmation') is-invalid @enderror"
+               type="password" name="password_confirmation" id="password_confirmation" required placeholder="********">
+
+        <span class="input-group-text toggle-password" data-target="#password_confirmation" style="cursor:pointer;">
+            show
+        </span>
+    </div>
+    @error('password_confirmation')
+    <div class="invalid-feedback d-block">{{ $message }}</div>
+    @enderror
+</div>
+
 
                         {{-- Registration Fee --}}
                         <div class="form-group">
                             <label>Registration Fee</label>
                             <div class="input-group">
-                                <span class="input-group-text"><i class="icon-credit-card"></i></span>
                                 <input class="form-control @error('registration_fee') is-invalid @enderror" type="number" name="registration_fee" value="10000" readonly min="10000" max="10000" step="1" placeholder="Registration fee">
                             </div>
                             @error('registration_fee')
@@ -217,6 +219,20 @@
         document.getElementById('registerForm').submit();
     });
 </script>
+<script>
+    document.querySelectorAll('.toggle-password').forEach(icon => {
+        icon.addEventListener('click', function () {
+            let input = document.querySelector(this.dataset.target);
+
+            if (input.type === "password") {
+                input.type = "text";
+            } else {
+                input.type = "password";
+            }
+        });
+    });
+</script>
+
 @endpush
 @push('styles')
 <style>
