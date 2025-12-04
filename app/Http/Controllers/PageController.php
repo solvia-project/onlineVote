@@ -92,8 +92,7 @@ class PageController extends Controller
         ];
 
         $elections = Election::withCount('votes')
-            ->orderByDesc('votes_count')
-            ->take(6)
+            ->orderByDesc('created_at')
             ->get();
 
         $topCandidates = [];

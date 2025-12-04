@@ -21,7 +21,7 @@
 
                     <p class="m-0">
                         Category :
-                        <span class="badge bg-success">Politik</span>
+                        <span class="badge bg-success">{{ $election->category }}</span>
                     </p>
                 </div>
 

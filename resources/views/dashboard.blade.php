@@ -77,24 +77,6 @@
                                 {{ $election->category ?? '—' }}
                             </span>
 
-                            <!-- IMAGE -->
-                            @if(!empty($election && $election->candidates->first()->image_path ? (\Illuminate\Support\Str::startsWith($election->candidates->first()->image_path, ['http', '/storage']) ? $election->candidates->first()->image_path : Storage::url(trim($election->candidates->first()->image_path, '/'))) : asset('images/caleg/caleg.png')))
-                            <img
-                                src="{{ $election && $election->candidates->first()->image_path ? (\Illuminate\Support\Str::startsWith($election->candidates->first()->image_path, ['http', '/storage']) ? $election->candidates->first()->image_path : Storage::url(trim($election->candidates->first()->image_path, '/'))) : asset('images/caleg/caleg.png') }}"
-                                class="card-img-top"
-                                alt="Candidate"
-                                style="
-                                        border-top-left-radius:12px;
-                                        border-top-right-radius:12px;
-                                        padding:40px 40px 0 40px;
-                                    ">
-                            @else
-                            <div class="card-img-top d-flex align-items-center justify-content-center"
-                                style="border-radius:12px; padding:40px; height:200px;">
-                                <span class="text-muted small">Gambar tidak tersedia</span>
-                            </div>
-                            @endif
-
                             <!-- CARD BODY -->
                             <div class="card-body text-center">
                                 <p class="fw-bold m-0">{{ $election->name }}</p>
