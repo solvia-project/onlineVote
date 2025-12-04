@@ -194,6 +194,7 @@
                                 @forelse($elections ?? [] as $e)
                                 @php($top = $topCandidates[$e->id] ?? null)
                                 <a class="list-group-item mb-3 text-center" style="border-radius:12px;"
+                                    data-election-id="{{ $e->id }}"
                                     data-e-name="{{ strtolower($e->name) }}"
                                     data-e-cand="{{ strtolower(optional($top)->name ?? '') }}">
                                     <p class="fw-bold d-block mb-1" style="font-size:16px; text-decoration:none;">
@@ -214,39 +215,9 @@
                     <!-- RIGHT SIDE ELECTION CARDS -->
                     <div class="col-xl-9 col-lg-4 col-md-7">
                         <div class="row g-4" id="electionCards">
-
-                            @foreach(($elections ?? []) as $e)
-                            @php($top = $topCandidates[$e->id] ?? null)
-                            <div class="col-4"
-                                data-e-name="{{ strtolower($e->name) }}"
-                                data-e-cand="{{ strtolower(optional($top)->name ?? '') }}">
-                                <div class="card shadow-sm h-100" style="border-radius:12px;">
-
-                                    <!-- HEADER -->
-                                    <div class="text-center p-3">
-                                        <h6 class="fw-bold m-0">
-                                            {{ $e->name }}
-                                        </h6>
-                                    </div>
-
-                                    <!-- IMAGE -->
-                                    <img src="{{ $top && $top->image_path ? (\Illuminate\Support\Str::startsWith($top->image_path, ['http', '/storage']) ? $top->image_path : Storage::url(trim($top->image_path, '/'))) : asset('images/caleg/caleg.png') }}"
-                                        class="card-img-top"
-                                        style="border-radius:12px; padding:40px;">
-
-                                    <!-- BODY -->
-                                    <div class="card-body text-center">
-                                        <p class="fw-bold m-0">{{ $top->name ?? '—' }}</p>
-                                        <p class="m-0 fw-semibold" style="font-size:20px;">
-                                            {{ number_format($top->votes_count ?? 0) }}
-                                        </p>
-                                        <p class="text-muted small">Votes</p>
-                                    </div>
-
-                                </div>
+                            <div class="col-12 d-flex align-items-center justify-content-center" style="min-height: 320px;">
+                                <div class="text-muted">choose election at sidebar</div>
                             </div>
-                            @endforeach
-
                         </div>
                     </div>
 
@@ -267,17 +238,15 @@
     document.addEventListener('DOMContentLoaded', function() {
         const input = document.getElementById('dashboardSearch');
         if (!input) return;
-        const leftItems = document.querySelectorAll('.list-group .list-group-item[data-e-name]');
-        const rightItems = document.querySelectorAll('#electionCards [data-e-name]');
         const filter = (q) => {
             const term = (q || '').toLowerCase().trim();
-            leftItems.forEach(el => {
+            document.querySelectorAll('.list-group .list-group-item[data-e-name]').forEach(el => {
                 const name = el.dataset.eName || '';
                 const cand = el.dataset.eCand || '';
                 const match = !term || name.includes(term) || cand.includes(term);
                 el.style.display = match ? '' : 'none';
             });
-            rightItems.forEach(el => {
+            document.querySelectorAll('#electionCards [data-e-name], #electionCards [data-e-cand]').forEach(el => {
                 const name = el.dataset.eName || '';
                 const cand = el.dataset.eCand || '';
                 const match = !term || name.includes(term) || cand.includes(term);
@@ -303,6 +272,50 @@
                 f.appendChild(csrf);
                 document.body.appendChild(f);
                 f.submit();
+            });
+        });
+
+        document.querySelectorAll('.list-group .list-group-item[data-election-id]').forEach(item => {
+            item.addEventListener('click', async () => {
+                const id = item.dataset.electionId;
+                const name = item.querySelector('p.fw-bold')?.textContent || '';
+                const container = document.getElementById('electionCards');
+                if (!id || !container) return;
+                container.innerHTML = '';
+                const res = await fetch(`/elections/${id}/candidates`);
+                if (!res.ok) return;
+                const data = await res.json();
+                if (!Array.isArray(data) || data.length === 0) {
+                    const empty = document.createElement('div');
+                    empty.className = 'col-12';
+                    empty.innerHTML = '<div class="text-center text-muted">No candidates</div>';
+                    container.appendChild(empty);
+                    return;
+                }
+                const fallbackImg = "{{ asset('images/caleg/caleg.png') }}";
+                data.forEach(c => {
+                    const col = document.createElement('div');
+                    col.className = 'col-4';
+                    col.setAttribute('data-e-name', name.toLowerCase());
+                    col.setAttribute('data-e-cand', (c.name || '').toLowerCase());
+                    const img = c.image_url || fallbackImg;
+                    const position = (c.position && c.position.name) ? c.position.name : '';
+                    const votes = c.votes_count || 0;
+                    col.innerHTML = `
+                        <div class="card shadow-sm h-100" style="border-radius:12px;">
+                            <div class="text-center p-3">
+                                <h6 class="fw-bold m-0">${position}</h6>
+                            </div>
+                            <img src="${img}" class="card-img-top" style="border-radius:12px; padding:40px;">
+                            <div class="card-body text-center">
+                                <p class="fw-bold m-0">${c.name || ''}</p>
+                                <p class="m-0 fw-semibold" style="font-size:20px;">${votes.toLocaleString()}</p>
+                                <p class="text-muted small">Votes</p>
+                            </div>
+                        </div>
+                    `;
+                    container.appendChild(col);
+                });
             });
         });
     });
