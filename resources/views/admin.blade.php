@@ -14,13 +14,6 @@
     <!-- Page Header -->
     <div class="page-main-header">
         <div class="main-header-right row m-0">
-
-            <div class="main-header-left">
-                <div class="toggle-sidebar">
-                    <i class="status_toggle middle" data-feather="align-center" id="sidebar-toggle"></i>
-                </div>
-            </div>
-
             <div class="nav-right col pull-right right-menu p-0">
                 <ul class="nav-menus">
                     <li class="onhover-dropdown p-0">
@@ -200,7 +193,7 @@
                                     <p class="fw-bold d-block mb-1" style="font-size:16px; text-decoration:none;">
                                         {{ $e->name }}
                                     </p>
-                                    <p class="m-0 fw-semibold">{{ optional($topCandidates[$e->id] ?? null)->name ?? '—' }}</p>
+                                    {{-- <p class="m-0 fw-semibold">{{ optional($topCandidates[$e->id] ?? null)->name ?? '—' }}</p> --}}
                                     <p class="m-0 text-muted small">{{ number_format($e->votes_count) }} Votes</p>
                                 </a>
                                 @empty
