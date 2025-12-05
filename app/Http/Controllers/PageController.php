@@ -7,12 +7,17 @@ use App\Models\Election;
 use App\Models\Candidate;
 use App\Models\Vote;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class PageController extends Controller
 {
     public function dashboard()
     {
-        $elections = Election::orderByDesc('start_at')->take(6)->get();
+        $elections = Election::where('status', '!=', 'done')->orderByDesc('start_at')->take(6)->get();
+        $votedElectionIds = [];
+        if (Auth::check()) {
+            $votedElectionIds = Vote::where('user_id', Auth::id())->pluck('election_id')->unique()->toArray();
+        }
         $previewCandidates = [];
         $previewUrls = [];
         foreach ($elections as $election) {
@@ -36,7 +41,7 @@ class PageController extends Controller
             }
             $previewUrls[$election->id] = $url;
         }
-        return view('dashboard', compact('elections', 'previewCandidates', 'previewUrls'));
+        return view('dashboard', compact('elections', 'previewCandidates', 'previewUrls', 'votedElectionIds'));
     }
 
     public function votePage(Request $request)
