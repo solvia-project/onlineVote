@@ -41,11 +41,11 @@
                     </li>
 
                     <!-- Logout Button -->
-                    <li class="nav-item">
-                        <a class="btn btn-outline-danger"
+                    <li class="nav-item d-flex align-items-center">
+                        <a class="btn btn-primary d-flex align-items-center"
                             href="{{ route('logout') }}"
                             onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                            <i data-feather="log-out"></i> Logout
+                            <i data-feather="log-out" class="me-1"></i> Logout
                         </a>
                     </li>
 
