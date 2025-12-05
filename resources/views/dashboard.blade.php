@@ -64,8 +64,9 @@
                 <div class="row g-4">
 
                     @foreach($elections as $election)
+                    @php($disabled = in_array($election->id, $votedElectionIds ?? []))
                     <div class="col-xl-4 col-md-6">
-                        <div class="card shadow-sm position-relative" style="border-radius:12px;">
+                        <div class="card shadow-sm position-relative" style="border-radius:12px; {{ $disabled ? 'opacity:0.45;' : '' }}">
 
                             <!-- LABEL -->
                             <span class="badge bg-success position-absolute top-0 end-0 m-2">
@@ -76,7 +77,9 @@
                             <div class="card-body text-center">
                                 <p class="fw-bold m-0">{{ $election->name }}</p>
                                 <p class="text-muted small m-0">Deadline : {{ $election->end_at ? \Illuminate\Support\Carbon::parse($election->end_at)->format('d M Y H:i') : '—' }}</p>
-                                <a class="btn btn-dark mt-2" href="{{ Auth::check() ? '/vote-page?election_id='.$election->id : route('login') }}">Vote Now</a>
+                                <a class="btn btn-dark mt-2 {{ $disabled ? 'disabled' : '' }}"
+                                   href="{{ $disabled ? 'javascript:void(0)' : (Auth::check() ? '/vote-page?election_id='.$election->id : route('login')) }}"
+                                   {{ $disabled ? 'aria-disabled=true tabindex=-1 style=pointer-events:none;' : '' }}>Vote Now</a>
                             </div>
 
                         </div>
