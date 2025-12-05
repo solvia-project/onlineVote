@@ -12,7 +12,7 @@ class PageController extends Controller
 {
     public function dashboard()
     {
-        $elections = Election::orderByDesc('start_at')->take(6)->get();
+        $elections = Election::where('status', '!=', 'done')->orderByDesc('start_at')->take(6)->get();
         $previewCandidates = [];
         $previewUrls = [];
         foreach ($elections as $election) {
