@@ -20,7 +20,7 @@
                 <div class="login-card">
                     <div class="login-main">
 
-                        <form class="theme-form login-form" method="POST" action="#">
+                        <form class="theme-form login-form" method="POST" action="{{ url('/forgot-password') }}">
                             @csrf
 
                             <h4 class="mb-3">Forgot Password</h4>
@@ -33,57 +33,45 @@
                                         <img src="{{ asset('images/login/email.png') }}" alt="">
                                     </span>
                                     <input type="email"
-                                           name="email"
-                                           class="form-control"
-                                           required
-                                           placeholder="email@mail.com">
+                                        name="email"
+                                        class="form-control"
+                                        required
+                                        placeholder="email@mail.com">
                                 </div>
                             </div>
 
-                            {{-- New Password --}}
                             <div class="form-group">
                                 <label>New Password</label>
                                 <div class="input-group">
-
-                                    <input type="password"
-                                           name="new_password"
-                                           id="new_password"
-                                           class="form-control"
-                                           required
-                                           placeholder="********">
-
-                                    <span class="input-group-text toggle-password"
-                                          data-target="#new_password"
-                                          style="cursor:pointer; background:white;">
+                                    <input type="password" name="new_password" id="new_password" class="form-control" required placeholder="New Password">
+                                    <span class="input-group-text toggle-password" data-target="#new_password" style="cursor:pointer; background:white;">
                                         <img src="{{ asset('images/login/eye.png') }}" class="icon-eye" alt="show">
                                     </span>
                                 </div>
                             </div>
 
-                            {{-- Retype Password --}}
                             <div class="form-group">
                                 <label>Retype Password</label>
                                 <div class="input-group">
-
-                                    <input type="password"
-                                           name="confirm_password"
-                                           id="confirm_password"
-                                           class="form-control"
-                                           required
-                                           placeholder="********">
-
-                                    <span class="input-group-text toggle-password"
-                                          data-target="#confirm_password"
-                                          style="cursor:pointer; background:white;">
+                                    <input type="password" name="confirm_password" id="confirm_password" class="form-control" required placeholder="Re-Type New Password">
+                                    <span class="input-group-text toggle-password" data-target="#confirm_password" style="cursor:pointer; background:white;">
                                         <img src="{{ asset('images/login/eye.png') }}" class="icon-eye" alt="show">
                                     </span>
                                 </div>
                             </div>
 
+                            @error('email')
+                            <p class="text-danger small mt-2">{{ $message }}</p>
+                            @enderror
+                            @if ($errors->has('new_password'))
+                            <p class="text-danger small mt-2">{{ $errors->first('new_password') }}</p>
+                            @endif
+                            @if ($errors->has('confirm_password'))
+                            <p class="text-danger small mt-2">{{ $errors->first('confirm_password') }}</p>
+                            @endif
+
                             <div class="form-group mt-3">
-                                <button class="btn btn-primary btn-block" type="submit">
-                                    Reset Password →
-                                </button>
+                                <button class="btn btn-primary btn-block" type="submit">Reset Password →</button>
                             </div>
 
                         </form>
@@ -96,18 +84,12 @@
     </div>
 </section>
 
-{{-- Password Toggle Script --}}
 <script>
     document.querySelectorAll('.toggle-password').forEach(btn => {
-        btn.addEventListener('click', function () {
-            let input = document.querySelector(this.dataset.target);
-            let icon = this.querySelector('.icon-eye');
-
-            if (input.type === "password") {
-                input.type = "text";
-            } else {
-                input.type = "password";
-            }
+        btn.addEventListener('click', function() {
+            const input = document.querySelector(this.dataset.target);
+            if (!input) return;
+            input.type = input.type === 'password' ? 'text' : 'password';
         });
     });
 </script>
@@ -118,6 +100,7 @@
         margin-top: 0 !important;
         margin-bottom: 0 !important;
     }
+
     .auth-section {
         min-height: 100vh;
         display: flex;
