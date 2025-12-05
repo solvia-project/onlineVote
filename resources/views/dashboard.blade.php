@@ -26,12 +26,7 @@
                             <div style="background:#b1d4c7; border-radius:12px;" class="p-2 text-center">
                                 <p class="text-white-50">Welcome to Election Page</p>
 
-                                <iframe
-                                    src="https://widgetbox.app/embed/clock/analog/3a7ca470-9b7c-4ba2-9571-f7a11be79b04"
-                                    width="230" height="230"
-                                    frameborder="0"
-                                    style="border-radius:8px;">
-                                </iframe>
+                                <iframe src="https://free.timeanddate.com/clock/ia6pgnx8/n108/szw210/szh210/hocfff/hbw0/hfcb2d4c6/cf100/hgr0/fas20/fdi86/mqc000/mqs2/mql3/mqw4/mqd70/mhc000/mhs2/mhl3/mhw4/mhd70/mmv0/hhs3/hms3/hsc00f" frameborder="0" width="210" height="210"></iframe>
                                 <p class="mt-3 text-white-50 text-center small">
                                     {{ now()->format('l, d F Y') }}
                                 </p>
