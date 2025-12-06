@@ -212,7 +212,7 @@
 
                             </div>
 
-                            <button type="button" class="btn btn-primary" id="addMoreCandidate">+ Add More Candidate</button>
+                            <button type="button" class="btn btn-primary btn-add-candidate" data-wrapper="#addElectionModal #candidateWrapper">+ Add More Candidate</button>
 
                         </div>
 
@@ -233,7 +233,7 @@
                 <div class="modal-content">
 
                     <div class="modal-header bg-primary text-white">
-                        <h5 class="modal-title">Add New Election</h5>
+                        <h5 class="modal-title">Edit Election</h5>
                     </div>
 
                     <form id="editForm" action="#" method="POST" enctype="multipart/form-data" class="theme-form">
@@ -310,7 +310,7 @@
 
                             </div>
 
-                            <button type="button" class="btn btn-primary" id="addMoreCandidate">+ Add More Candidate</button>
+                            <button type="button" class="btn btn-primary btn-add-candidate" data-wrapper="#editElectionModal #candidateWrapper">+ Add More Candidate</button>
 
                         </div>
 
@@ -390,6 +390,7 @@
                                 </div>
                                 <label class="fw-bold">Candidate Description</label>
                                 <textarea name="candidate_description[]" class="form-control" rows="3" placeholder="Deskripsi kandidat"></textarea>
+                                <input type="hidden" name="candidate_id[]" value="${c.id}">
                             `;
                             wrapper.appendChild(item);
                             const nameInput = item.querySelector('input[name="candidate_name[]"]');
@@ -397,10 +398,8 @@
                             const imgEl = item.querySelector('.img-preview');
                             if (nameInput) nameInput.value = c.name || '';
                             if (descInput) descInput.value = c.bio || '';
-                            const p = c.image_path || '';
-                            let url = '';
-                            if (p) {
-                                url = (p.startsWith('http') || p.startsWith('/storage')) ? p : ('/storage/' + p);
+                            const url = c.image_url || '';
+                            if (url) {
                                 imgEl.src = url;
                                 imgEl.style.display = 'block';
                             }
@@ -477,12 +476,14 @@
                     });
                 });
 
-                const addBtn = document.getElementById('addMoreCandidate');
-                if (addBtn) {
-                    addBtn.addEventListener('click', () => {
-                        const wrapper = document.querySelector('#addElectionModal #candidateWrapper');
+                document.querySelectorAll('.btn-add-candidate').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const selector = btn.dataset.wrapper || '';
+                        const wrapper = selector ? document.querySelector(selector) : btn.closest('.modal')?.querySelector('#candidateWrapper');
+                        if (!wrapper) return;
                         const last = wrapper.querySelector('.candidate-item:last-child');
-                        const clone = last.cloneNode(true);
+                        const template = last || wrapper.querySelector('.candidate-item');
+                        const clone = template.cloneNode(true);
                         clone.querySelectorAll('input, textarea').forEach(el => {
                             el.value = '';
                         });
@@ -494,7 +495,7 @@
                         wrapper.appendChild(clone);
                         attachPreview(clone);
                     });
-                }
+                });
             });
         </script>
         @endpush
