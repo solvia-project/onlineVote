@@ -81,6 +81,7 @@ Route::get('/voters-dashboard', [PageController::class, 'votersDashboard'])->mid
 Route::get('/admin/dashboard', [PageController::class, 'adminDashboard'])->middleware(['auth', 'admin']);
 
 Route::get('/admin/manage', [PageController::class, 'adminManage'])->middleware(['auth', 'admin']);
+Route::get('/admin/analytics', [PageController::class, 'adminAnalytics'])->middleware(['auth', 'admin']);
 
 Route::middleware('auth')->post('/votes', [VoteController::class, 'store'])->name('votes.store');
 
