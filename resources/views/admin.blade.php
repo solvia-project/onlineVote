@@ -156,9 +156,38 @@
 
                 <hr class="my-5">
 
+                <div class="row g-4 p-4" style="border-radius:12px; background:#ffffff;">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h5 class="fw-bold mb-0">Analytics</h5>
+                        <div class="d-flex align-items-center gap-2">
+                            <select id="analyticsElection" class="form-select" style="max-width:260px;"></select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card" style="border-radius:12px;">
+                                <div class="card-body">
+                                    <h6 class="fw-bold mb-3">Registration Revenue</h6>
+                                    <div id="revenueChart" style="height:180px;"></div>
+                                    <p class="m-0 mt-2 text-muted small">Total: <span id="revenueTotal">0</span></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card" style="border-radius:12px;">
+                                <div class="card-body">
+                                    <h6 class="fw-bold mb-3">Votes</h6>
+                                    <div id="votesChart" style="height:180px;"></div>
+                                    <p class="m-0 mt-2 text-muted small">Total: <span id="votesTotal">0</span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="my-5">
+
                 {{-- testing --}}
-
-
 
                 <!-- WRAPPER -->
                 <div class="row g-4 p-4" style="border-radius:12px; background:#ffffff;">
@@ -305,6 +334,160 @@
                 });
             });
         });
+
+        function fmtMoney(n) {
+            return (n || 0).toLocaleString('id-ID');
+        }
+        let revenueChart, votesChart;
+        async function loadAnalytics(electionId) {
+            const res = await fetch(`/admin/analytics${electionId?`?election_id=${electionId}`:''}`);
+            if (!res.ok) return;
+            const data = await res.json();
+            const sel = document.getElementById('analyticsElection');
+            if (sel && sel.options.length === 0) {
+                const opt0 = document.createElement('option');
+                opt0.value = '';
+                opt0.textContent = 'All Elections';
+                sel.appendChild(opt0);
+                (data.elections || []).forEach(e => {
+                    const o = document.createElement('option');
+                    o.value = e.id;
+                    o.textContent = e.name;
+                    sel.appendChild(o);
+                });
+            }
+            document.getElementById('revenueTotal').textContent = fmtMoney(data.revenue_total || 0);
+            document.getElementById('votesTotal').textContent = fmtMoney(data.votes_total || 0);
+            const revSeries = (data.revenue_by_day || []).map(d => ({
+                x: d.day,
+                y: d.total
+            }));
+            const vSeries = (data.votes_by_day || []).map(d => ({
+                x: d.day,
+                y: d.total
+            }));
+
+            const revOpts = {
+                series: [{
+                    name: 'Revenue (IDR)',
+                    data: revSeries
+                }],
+                chart: {
+                    type: 'area',
+                    height: 220,
+                    toolbar: {
+                        show: false
+                    }
+                },
+                dataLabels: {
+                    enabled: false
+                },
+                stroke: {
+                    curve: 'smooth',
+                    colors: ['#325246']
+                },
+                markers: {
+                    size: 4,
+                    colors: ['#325246'],
+                    strokeColors: '#325246',
+                    strokeWidth: 2
+                },
+                xaxis: {
+                    type: 'category',
+                    labels: {
+                        rotate: 0
+                    }
+                },
+                yaxis: {
+                    min: 0
+                },
+                fill: {
+                    type: 'gradient',
+                    gradient: {
+                        shadeIntensity: 1,
+                        opacityFrom: 0.3,
+                        opacityTo: 0.6,
+                        stops: [0, 100]
+                    }
+                },
+                colors: ['#b1d4c7']
+            };
+            const maxVotesPoint = Math.max(...(vSeries || []).map(p => (typeof p.y === 'number' ? p.y : parseFloat(p.y) || 0)), 0);
+            const stepVotes = Math.max(1, Math.ceil(maxVotesPoint / 6));
+            const yMaxVotes = stepVotes * 6;
+            const votesOpts = {
+                series: [{
+                    name: 'Votes',
+                    data: vSeries
+                }],
+                chart: {
+                    type: 'area',
+                    height: 220,
+                    toolbar: {
+                        show: false
+                    }
+                },
+                dataLabels: {
+                    enabled: false
+                },
+                stroke: {
+                    curve: 'smooth',
+                    colors: ['#325246']
+                },
+                markers: {
+                    size: 4,
+                    colors: ['#325246'],
+                    strokeColors: '#325246',
+                    strokeWidth: 2
+                },
+                xaxis: {
+                    type: 'category',
+                    labels: {
+                        rotate: 0
+                    }
+                },
+                yaxis: {
+                    min: 0,
+                    max: yMaxVotes,
+                    tickAmount: 6,
+                    labels: {
+                        formatter: (val) => String(Math.round(val))
+                    }
+                },
+                tooltip: {
+                    y: {
+                        formatter: (val) => parseInt(val, 10).toLocaleString('id-ID')
+                    }
+                },
+                fill: {
+                    type: 'gradient',
+                    gradient: {
+                        shadeIntensity: 1,
+                        opacityFrom: 0.2,
+                        opacityTo: 0.4,
+                        stops: [0, 100]
+                    }
+                },
+                colors: ['#b1d4c7']
+            };
+            if (revenueChart) revenueChart.destroy();
+            if (votesChart) votesChart.destroy();
+            revenueChart = new ApexCharts(document.querySelector('#revenueChart'), revOpts);
+            votesChart = new ApexCharts(document.querySelector('#votesChart'), votesOpts);
+            revenueChart.render();
+            votesChart.render();
+        }
+        const sel = document.getElementById('analyticsElection');
+        if (sel) {
+            sel.addEventListener('change', () => {
+                const id = sel.value ? parseInt(sel.value, 10) : undefined;
+                loadAnalytics(id);
+            });
+        }
+        const script = document.createElement('script');
+        script.src = '/js/chart/apex-chart/apex-chart.js';
+        script.onload = () => loadAnalytics();
+        document.body.appendChild(script);
     });
 </script>
 @endpush

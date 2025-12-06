@@ -8,6 +8,9 @@ use App\Models\Candidate;
 use App\Models\Vote;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class PageController extends Controller
 {
@@ -109,6 +112,41 @@ class PageController extends Controller
         }
 
         return view('admin', compact('stats', 'elections', 'topCandidates'));
+    }
+
+    public function adminAnalytics(Request $request)
+    {
+        $electionId = (int) $request->query('election_id');
+        $elections = Election::orderBy('name')->get(['id', 'name']);
+
+        $revenueTotal = (int) User::whereNotNull('registration_fee')->sum('registration_fee');
+
+        $revenueByDay = User::select(DB::raw('DATE(created_at) as day'), DB::raw('SUM(COALESCE(registration_fee,0)) as total'))
+            ->groupBy('day')
+            ->orderBy('day')
+            ->get()
+            ->map(fn ($row) => ['day' => $row->day, 'total' => (int) $row->total])
+            ->all();
+
+        $votesQuery = Vote::query();
+        if ($electionId) {
+            $votesQuery->where('election_id', $electionId);
+        }
+        $votesTotal = (int) $votesQuery->count();
+        $votesByDay = $votesQuery->select(DB::raw('DATE(cast_at) as day'), DB::raw('COUNT(*) as total'))
+            ->groupBy('day')
+            ->orderBy('day')
+            ->get()
+            ->map(fn ($row) => ['day' => $row->day, 'total' => (int) $row->total])
+            ->all();
+
+        return response()->json([
+            'elections' => $elections,
+            'revenue_total' => $revenueTotal,
+            'revenue_by_day' => $revenueByDay,
+            'votes_total' => $votesTotal,
+            'votes_by_day' => $votesByDay,
+        ]);
     }
 
     public function adminManage()
