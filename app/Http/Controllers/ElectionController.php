@@ -109,8 +109,83 @@ class ElectionController extends Controller
             'start_at' => ['nullable', 'date'],
             'end_at' => ['nullable', 'date', 'after_or_equal:start_at'],
             'status' => ['sometimes', 'in:draft,active,done'],
+            'candidate_id' => ['sometimes', 'array'],
+            'candidate_id.*' => ['nullable'],
+            'candidate_name' => ['sometimes', 'array'],
+            'candidate_name.*' => ['nullable', 'string', 'max:255'],
+            'candidate_description' => ['sometimes', 'array'],
+            'candidate_description.*' => ['nullable', 'string'],
+            'candidate_image' => ['sometimes', 'array'],
+            'candidate_image.*' => ['nullable', 'image', 'max:4096'],
         ]);
-        $election->update($data);
+        DB::transaction(function () use ($data, $request, $election) {
+            $election->update($data);
+
+            $ids = (array) $request->input('candidate_id', []);
+            $names = (array) $request->input('candidate_name', []);
+            $descs = (array) $request->input('candidate_description', []);
+            $files = (array) $request->file('candidate_image', []);
+
+            $validIndexes = [];
+            foreach ($names as $idx => $n) {
+                if (trim((string) $n) !== '') {
+                    $validIndexes[] = $idx;
+                }
+            }
+
+            if (count($validIndexes) > 0) {
+                $position = Position::firstOrCreate([
+                    'election_id' => $election->id,
+                    'name' => 'General',
+                ]);
+
+                foreach ($validIndexes as $idx) {
+                    $name = trim((string) $names[$idx]);
+                    $bio = isset($descs[$idx]) ? (string) $descs[$idx] : null;
+                    $imagePath = null;
+                    $file = Arr::get($files, $idx);
+                    if ($file) {
+                        $safeName = Str::slug($name) ?: 'candidate';
+                        $dir = "elections/{$election->id}/candidates/{$safeName}";
+                        $stored = $file->store($dir, 'public');
+                        $imagePath = $stored;
+                    }
+                    $cid = Arr::get($ids, $idx);
+                    if ($cid) {
+                        $existing = Candidate::where('id', $cid)
+                            ->where('election_id', $election->id)
+                            ->first();
+                        if ($existing) {
+                            $existing->name = $name;
+                            $existing->bio = $bio;
+                            if ($imagePath) {
+                                $existing->image_path = $imagePath;
+                            }
+                            $existing->save();
+                            continue;
+                        }
+                    }
+                    $existingByName = Candidate::where('position_id', $position->id)
+                        ->where('name', $name)
+                        ->first();
+                    if ($existingByName) {
+                        $existingByName->bio = $bio;
+                        if ($imagePath) {
+                            $existingByName->image_path = $imagePath;
+                        }
+                        $existingByName->save();
+                    } else {
+                        Candidate::create([
+                            'election_id' => $election->id,
+                            'position_id' => $position->id,
+                            'name' => $name,
+                            'bio' => $bio,
+                            'image_path' => $imagePath,
+                        ]);
+                    }
+                }
+            }
+        });
         if ($request->expectsJson()) {
             return response()->json(['data' => $election]);
         }
